@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>A Little Book of Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo+Black&family=Caveat:wght@400;600&family=Courier+Prime:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=La+Belle+Aurore&family=Nanum+Pen+Script&family=Share+Tech+Mono&family=Special+Elite&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ LOCK ============ -->
+<div id="lock">
+    <div class="petals" aria-hidden="true"></div>
+    <form id="lockForm" class="lock-env">
+        <div class="lock-flap"></div>
+        <div class="postmark" id="postmark" aria-hidden="true"></div>
+        <div class="lock-paper torn">
+            <p class="type">— private &amp; confidential —</p>
+            <p class="hand big">for your eyes only</p>
+            <label for="pw" class="type small" id="hintLbl"></label>
+            <div class="lock-row">
+                <div class="combo" id="combo" role="group" hidden></div>
+                <input id="pw" type="password" autocomplete="off" aria-labelledby="hintLbl">
+                <button type="submit" class="seal-btn" aria-label="Open">open</button>
+            </div>
+            <p id="lockMsg" class="hand" aria-live="polite"></p>
+        </div>
+    </form>
+</div>
+
+<!-- ============ BOOK COVER (shown after the password, she taps to open it) ============ -->
+<div id="cover" role="button" tabindex="0" aria-label="Open the book">
+    <div class="cover-wrap"></div>
+    <p class="hand cover-hint">tap to open ♡</p>
+</div>
+
+<main class="book">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+        <div class="hero-text">
+            <p class="hand kicker">a little book of</p>
+            <h1 class="ransom" id="ransom" aria-label="you and me"></h1>
+            <p class="type byline" id="byline"></p>
+            <div class="ticket" id="ticket"></div>
+            <div class="counter" id="counter" role="timer"></div>
+        </div>
+        <div class="hero-collage">
+            <div class="booth" id="booth"></div>
+            <div class="hero-pol" id="heroPol"></div>
+            <button class="cassette" id="songTape" aria-label="Play our song">
+                <span class="c-label"><span class="hand" id="songTitle">our song</span><span class="type tiny">side a</span></span>
+                <span class="c-window"><span class="reel"></span><span class="reel"></span></span>
+            </button>
+            <svg class="doodle d-heart" viewBox="0 0 60 56" aria-hidden="true"><path d="M30 50C18 41 5 32 5 19 5 10 12 5 19 6c6 1 9 6 11 10 2-5 6-10 13-10 8 0 13 7 11 15-2 12-14 21-24 29" /><path d="M27 47c-9-8-18-15-19-26" /></svg>
+            <span class="sticker">xoxo</span>
+        </div>
+    </header>
+
+    <!-- ============ SCRAPBOOK ============ -->
+    <section id="scrapbook" class="band linen">
+        <div class="sec-title">
+            <span class="label-tape">the scrapbook</span>
+            <span class="hand note">tap any photo to look closer
+        <svg class="doodle d-arrow" viewBox="0 0 70 40" aria-hidden="true"><path d="M4 8c18-6 40 0 54 22"/><path d="M47 27l12 5 1-13"/></svg>
+      </span>
+        </div>
+        <div id="spreads"></div>
+    </section>
+
+    <!-- ============ FILM ROLL ============ -->
+    <section id="roll" class="band cork">
+        <div class="sec-title">
+            <span class="label-tape">the last roll</span>
+            <span class="hand note" id="rollNote">scroll sideways →</span>
+        </div>
+        <div class="film-scroll"><div class="film" id="film"></div></div>
+    </section>
+
+    <!-- ============ REASONS ============ -->
+    <section id="reasons" class="band gingham">
+        <div class="sec-title">
+            <span class="label-tape">why it's you</span>
+            <span class="hand note">tear one off, there's always another</span>
+        </div>
+        <div class="notes-wrap">
+            <div class="notes" id="notes"></div>
+            <p class="type small" id="noteCount" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <!-- ============ OUR LITTLE GARDEN ============ -->
+    <section id="garden" class="band garden-band">
+        <div class="sec-title">
+            <span class="label-tape">our little garden</span>
+            <span class="hand note">a new tulip blooms every month we're together</span>
+        </div>
+        <div class="garden" id="gardenCard">
+            <span class="washi" style="--wash:var(--sage);top:-12px;left:calc(50% - 48px);transform:rotate(-4deg)"></span>
+            <svg id="gardenSvg" viewBox="0 0 300 300" role="img" aria-label="a tulip growing in a pot"></svg>
+            <p class="hand garden-cap" id="gardenCap"></p>
+            <p class="type small garden-sub" id="gardenSub"></p>
+        </div>
+    </section>
+
+    <!-- ============ OPEN WHEN ============ -->
+    <section id="letters" class="band kraft">
+        <div class="sec-title">
+            <span class="label-tape">open when…</span>
+            <span class="hand note">only open the one that's true today</span>
+        </div>
+        <div class="envelopes" id="envelopes"></div>
+    </section>
+
+    <!-- ============ SOMEDAY ============ -->
+    <section id="someday">
+        <div class="notebook-wrap">
+            <span class="washi" style="--wash:var(--rose);top:-10px;left:12%;transform:rotate(-6deg)"></span>
+            <span class="washi dots" style="--wash:var(--sage);top:-8px;right:14%;transform:rotate(5deg)"></span>
+            <div class="clip-pol" id="clipPol"></div>
+            <div class="notebook torn">
+                <svg class="doodle nb-star" viewBox="0 0 40 50" aria-hidden="true"><path d="M20 47V27"/><path d="M20 27c-7 0-10-6-10-15l5 4 5-7 5 7 5-4c0 9-3 15-10 15z"/><path d="M20 41c-4-1-7-4-8-9 4 0 7 3 8 9z"/></svg>
+                <p class="type small">things to do with you —</p>
+                <h2 class="hand">someday, together</h2>
+                <ul id="list"></ul>
+                <p class="hand nb-foot">(starting with all of them)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FINAL ============ -->
+    <section id="final">
+        <div class="sec-title">
+            <span class="label-tape">p.s.</span>
+            <span class="hand note">save this one for last</span>
+        </div>
+        <div class="final">
+            <div class="final-letter-wrap"><div id="finalLetter"></div>
+                <svg class="flower on-letter" viewBox="0 0 120 220" aria-hidden="true">
+                    <path class="stem" d="M60 96C61 140 58 180 60 214"/>
+                    <path class="leaf" d="M60 204C40 184 30 152 34 118c12 22 22 48 26 86z"/>
+                    <path class="leaf" d="M61 190c19-20 27-46 23-74-12 20-20 46-23 74z"/>
+                    <path class="t-back" d="M44 60C46 40 54 30 60 25c6 5 14 15 16 35-4 26-28 26-32 0z"/>
+                    <path class="t-side" d="M60 100C41 98 33 80 35 50c9 6 18 14 25 28z"/>
+                    <path class="t-side" d="M60 100c19-2 27-20 25-50-9 6-18 14-25 28z"/>
+                    <path class="t-front" d="M47 64c2-16 8-24 13-29 5 5 11 13 13 29-1 22-9 36-13 36s-12-14-13-36z"/>
+                    <path class="t-shine" d="M54 50c-2 8-2 18 0 28"/>
+                </svg>
+                <span class="washi" style="--wash:var(--butter);right:6%;top:-8px;left:auto;transform:rotate(7deg)"></span>
+            </div>
+            <div class="final-side">
+                <div class="keep" id="keep"></div>
+                <button class="cassette big" id="voiceTape" aria-label="Hear me read it" hidden>
+                    <span class="c-label"><span class="hand">hear me read it</span><span class="type tiny">voice memo</span></span>
+                    <span class="c-window"><span class="reel"></span><span class="reel"></span></span>
+                </button>
+                <p class="hand final-note">read it twice. <svg class="doodle note-heart" viewBox="0 0 60 56" aria-hidden="true"><path d="M30 50C18 41 5 32 5 19 5 10 12 5 19 6c6 1 9 6 11 10 2-5 6-10 13-10 8 0 13 7 11 15-2 12-14 21-24 29"/></svg></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span class="end-seal"><svg class="tulip-g" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z"/><path class="tg-stem" d="M12 14v6.5"/><path d="M12 19.2c-2.6-.2-4.2-1.7-4.8-3.8 2.4.2 4 1.5 4.8 3.8z"/></svg></span>
+        <p class="end-title">the end <em>of volume one</em></p>
+        <span class="hand" id="footer"></span>
+        <div class="sealed" id="sealed" hidden></div>
+    </footer>
+</main>
+
+<!-- night mode: a starry dim after 11pm, and a little goodnight note -->
+<div id="night" aria-hidden="true"></div>
+<div class="night-note" id="nightNote" hidden role="status"><p class="hand"></p><button class="type" aria-label="Close the note">×</button></div>
+
+<!-- the mixtape player (her songs) -->
+<div class="deck" id="deck" hidden role="region" aria-label="Music player">
+    <span class="washi deck-tape1" aria-hidden="true"></span><span class="washi dots deck-tape2" aria-hidden="true"></span>
+    <div class="deck-paper torn">
+        <div class="mc" aria-hidden="true">
+            <span class="mc-label"><span>side a</span></span>
+            <span class="mc-win"><span class="dreel l"><i></i></span><span class="mc-tape"></span><span class="dreel r"><i></i></span></span>
+            <span class="mc-foot"></span>
+        </div>
+        <div class="deck-info">
+            <span class="deck-kick"><span class="k-on">now playing ♪</span><span class="k-off">paused</span></span>
+            <span class="deck-title"></span>
+            <span class="deck-artist"></span>
+        </div>
+        <div class="deck-btns">
+            <button class="dk prev" aria-label="Previous song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6v12"/><path d="M18 6.5 9.5 12l8.5 5.5z"/></svg></button>
+            <button class="dk play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6v12l9.5-6z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.5v11M15.5 6.5v11"/></svg></button>
+            <button class="dk next" aria-label="Next song"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 6v12"/><path d="M6 6.5l8.5 5.5L6 17.5z"/></svg></button>
+        </div>
+        <div class="deck-prog"><span class="t-cur">0:00</span><input class="deck-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Song position"><span class="t-dur">0:00</span></div>
+        <button class="deck-min" aria-label="Make the player smaller">–</button>
+    </div>
+</div>
+
+<button class="music-btn" id="musicBtn" hidden aria-pressed="true" aria-label="Background music">
+    <span class="mb-note" aria-hidden="true">♪</span><span class="mb-txt">music on</span>
+</button>
+
+<dialog id="lightbox"><div class="lb-inner"><img id="lbImg" alt=""><span class="date-stamp" id="lbStamp"></span><p class="hand" id="lbCap"></p><button class="lb-close type" id="lbClose">close ×</button></div></dialog>
+<dialog id="letterBox"><div class="stage" id="stage"></div></dialog>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
