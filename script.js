@@ -39,8 +39,9 @@
             const img = new Image();
             img.onload = () => {
                 try {
-                    const c = document.createElement("canvas"); c.width = c.height = size;
-                    c.getContext("2d").drawImage(img, 0, 0, size, size);
+                    const px = Math.round(size * Math.min(3, Math.max(1, window.devicePixelRatio || 1)));   // sharp on high-res phone screens
+                    const c = document.createElement("canvas"); c.width = c.height = px;
+                    c.getContext("2d").drawImage(img, 0, 0, px, px);
                     const done = url => root.style.setProperty(to, `url(${url})`);
                     if (c.toBlob) c.toBlob(b => b ? done(URL.createObjectURL(b)) : fallback(), "image/png");
                     else done(c.toDataURL("image/png"));
@@ -1082,8 +1083,7 @@
             if (vis && !grown) {
                 grown = true;
                 const t0 = performance.now(), dur = 2800;
-                let lastDraw = 0;   // ~30 redraws a second is plenty for a growing flower and half the work on phones
-                const step = t => { const k = clamp((t - t0) / dur); if (k >= 1 || t - lastDraw > 30) { lastDraw = t; draw(1 - Math.pow(1 - k, 3)); } if (k < 1) requestAnimationFrame(step); };
+                const step = t => { const k = clamp((t - t0) / dur); draw(1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); };
                 requestAnimationFrame(step);
             }
         }, { threshold: .35 }).observe(card);
