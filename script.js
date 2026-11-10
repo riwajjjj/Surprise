@@ -27,6 +27,30 @@
     const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
     const tilt = (max = 4) => (rnd() * 2 - 1) * max;
 
+    /* ---------- bake the SVG-filter paper textures into plain images, once ----------
+       (phones re-run SVG filters whenever they repaint, which made scrolling stutter) */
+    (function bakeTextures() {
+        const root = document.documentElement, cs = getComputedStyle(root);
+        [["--fibres-src", "--fibres", 320], ["--crease-src", "--crease", 400]].forEach(([from, to, size]) => {
+            const raw = cs.getPropertyValue(from).trim();
+            const m = raw.match(/^url\((["']?)(.*)\1\)$/);
+            if (!m) return;
+            const fallback = () => root.style.setProperty(to, raw);
+            const img = new Image();
+            img.onload = () => {
+                try {
+                    const c = document.createElement("canvas"); c.width = c.height = size;
+                    c.getContext("2d").drawImage(img, 0, 0, size, size);
+                    const done = url => root.style.setProperty(to, `url(${url})`);
+                    if (c.toBlob) c.toBlob(b => b ? done(URL.createObjectURL(b)) : fallback(), "image/png");
+                    else done(c.toDataURL("image/png"));
+                } catch (e) { fallback(); }
+            };
+            img.onerror = fallback;
+            img.src = m[2];
+        });
+    })();
+
     /* ---------- paper grain (generated once) ---------- */
     (function grain() {
         const c = document.createElement("canvas"); c.width = c.height = 180;
@@ -550,8 +574,10 @@
             if (wheels.length !== s.length) build(s.length);
             wheels.forEach((w, i) => w.style.setProperty("--d", s[i]));
         }
+        let onScreen = true;
+        if ("IntersectionObserver" in window) new IntersectionObserver(es => { onScreen = es[0].isIntersecting; if (onScreen) tick(); }).observe(el.parentElement);
         function tick() {
-            if (document.hidden) return;
+            if (document.hidden || !onScreen) return;
             const now = Date.now();
             if (now < start) { el.hidden = true; return; }
             el.hidden = false;
@@ -1056,7 +1082,8 @@
             if (vis && !grown) {
                 grown = true;
                 const t0 = performance.now(), dur = 2800;
-                const step = t => { const k = clamp((t - t0) / dur); draw(1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); };
+                let lastDraw = 0;   // ~30 redraws a second is plenty for a growing flower and half the work on phones
+                const step = t => { const k = clamp((t - t0) / dur); if (k >= 1 || t - lastDraw > 30) { lastDraw = t; draw(1 - Math.pow(1 - k, 3)); } if (k < 1) requestAnimationFrame(step); };
                 requestAnimationFrame(step);
             }
         }, { threshold: .35 }).observe(card);
