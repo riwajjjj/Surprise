@@ -33,10 +33,11 @@
    ===================================================================== */
 window.CONFIG = {
     password: "0710",                    // set to "" to remove the lock
-    passwordHint: "the day we first got together (ddmm)",   // a 4-number password shows as a little combination lock
+    passwordHint: "the day we first got together (day · month)",   // a 4-number password shows as a little combination lock
     wrongAnswers: ["nope ♡ try again", "think harder, i'll wait", "hmm, do you not remember?? 😤"],   // shown one by one on wrong tries
     lastHint: "it's the night you said yes (00:55) ♡",   // shown after all the wrong answers above
-    postmarkCity: "KATHMANDU",           // the postmark on the envelope (with your 'since' date)
+    postmarkCity: "KATHMANDU",           // the postmark on the envelope
+    postmarkDate: "",                    // the date on the postmark, e.g. "14.11.2026" ("" = the day she opens it). Never use your 'since' date: it's the password!
     title: "you & me",                   // the cut-out letters in the hero
     to: "My Love",                         // their name
     from: "Rii",

@@ -16,19 +16,20 @@
 <div id="lock">
     <div class="petals" aria-hidden="true"></div>
     <form id="lockForm" class="lock-env">
-        <div class="lock-flap"></div>
-        <div class="postmark" id="postmark" aria-hidden="true"></div>
+        <div class="env-back" aria-hidden="true"></div>
+        <div class="lock-flap" aria-hidden="true"></div>
         <div class="lock-paper torn">
-            <p class="type">— private &amp; confidential —</p>
+            <p class="type conf">— private &amp; confidential —</p>
             <p class="hand big">for your eyes only</p>
             <label for="pw" class="type small" id="hintLbl"></label>
             <div class="lock-row">
                 <div class="combo" id="combo" role="group" hidden></div>
                 <input id="pw" type="password" autocomplete="off" aria-labelledby="hintLbl">
-                <button type="submit" class="seal-btn" aria-label="Open">open</button>
             </div>
             <p id="lockMsg" class="hand" aria-live="polite"></p>
         </div>
+        <div class="env-pocket" aria-hidden="true"><div class="postmark" id="postmark"></div></div>
+        <button type="submit" class="seal-btn" aria-label="Open">open</button>
     </form>
 </div>
 

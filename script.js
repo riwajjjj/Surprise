@@ -391,17 +391,19 @@
 
         // the postmark + a little tulip stamp in the corner of the envelope
         const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        const sm = String(C.since || "").match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);
+        // the postmark shows the day she opens it (or config.js → postmarkDate), never your 'since' date, which is the password
+        const pm = String(C.postmarkDate || "").match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/), tw = wallOf(Date.now());
+        const sm = pm || [0, tw.d, tw.mo + 1, tw.y];
         const city = esc(String(C.postmarkCity || "KATHMANDU").toUpperCase());
         $("#postmark").innerHTML = `<span class="postage lock-stamp"><i>${TULIP}</i></span>
           <svg class="pm" viewBox="0 0 170 120" aria-hidden="true">
-            <defs><path id="pmTop" d="M24 60a36 36 0 0 1 72 0"/><path id="pmBot" d="M20 60a40 40 0 0 0 80 0"/></defs>
-            <g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="44" stroke-width="2.2"/><circle cx="60" cy="60" r="31" stroke-width="1.2"/>
-              <path d="M104 44c10-6 20 6 30 0s20-6 30 0M106 60c10-6 20 6 30 0s20-6 30 0M104 76c10-6 20 6 30 0s20-6 30 0" stroke-width="2.2" stroke-linecap="round"/></g>
+            <defs><path id="pmTop" d="M84 60a36 36 0 0 1 72 0"/><path id="pmBot" d="M80 60a40 40 0 0 0 80 0"/></defs>
+            <g fill="none" stroke="currentColor"><circle cx="120" cy="60" r="44" stroke-width="2.2"/><circle cx="120" cy="60" r="31" stroke-width="1.2"/>
+              <path d="M4 44c10-6 20 6 30 0s20-6 30 0M2 60c10-6 20 6 30 0s20-6 30 0M4 76c10-6 20 6 30 0s20-6 30 0" stroke-width="2.2" stroke-linecap="round"/></g>
             <text font-size="10.5" letter-spacing="1.6" fill="currentColor"><textPath href="#pmTop" startOffset="50%" text-anchor="middle">${city}</textPath></text>
             <text font-size="9" letter-spacing="2" fill="currentColor"><textPath href="#pmBot" startOffset="50%" text-anchor="middle">♡ US ♡</textPath></text>
-            ${sm ? `<text x="60" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">${pad(sm[1])} ${MON[+sm[2] - 1] || ""}</text>
-                    <text x="60" y="72" text-anchor="middle" font-size="11" letter-spacing="1" fill="currentColor">${sm[3]}</text>` : ""}
+            <text x="120" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">${pad(sm[1])} ${MON[+sm[2] - 1] || ""}</text>
+            <text x="120" y="72" text-anchor="middle" font-size="11" letter-spacing="1" fill="currentColor">${sm[3]}</text>
           </svg>`;
 
         // tulip petals drifting down behind the envelope
@@ -415,7 +417,8 @@
 
         const hideLock = () => { lock.classList.add("gone"); setTimeout(() => { lock.hidden = true; }, 900); };
         if (!PASS) { hideLock(); showCover(); return; }
-        $("#hintLbl").textContent = C.passwordHint || "";
+        // keep a trailing "(day · month)" together on one line
+        $("#hintLbl").innerHTML = esc(C.passwordHint || "").replace(/\s*(\([^)]*\))\s*$/, ' <span class="nw">$1</span>');
 
         // the combination lock: one wheel per digit
         const dials = [];

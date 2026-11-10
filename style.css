@@ -1114,3 +1114,37 @@ html.night #gardenSvg .sky2{stop-color:#5b5576}
    ===================================================================== */
 /* sections far below the screen skip painting until she scrolls near them */
 #garden,#letters,#someday{content-visibility:auto;contain-intrinsic-size:auto 900px}
+
+
+/* =====================================================================
+   v20: the lock screen as a real opened envelope
+   the letter stands up out of the pocket, the flap is folded open above it,
+   the wax seal sits where the pocket's folds meet, the postmark and stamp are on the front.
+   ===================================================================== */
+.lock-env{--ew:min(400px,calc(100vw - 32px));--ph:calc(var(--ew) * .5);width:var(--ew);background:none;box-shadow:none;padding:0;transform:rotate(-1deg);
+    display:grid;filter:drop-shadow(0 26px 30px rgba(40,25,15,.38))}
+.env-back{position:absolute;left:0;right:0;bottom:0;height:calc(var(--ph) + var(--ew) * .16);background:var(--kraft-2);border-radius:3px;
+    background-image:var(--grain,none),linear-gradient(180deg,rgba(0,0,0,.12),transparent 40%)}
+.lock-flap{inset:auto 0 auto 0;top:auto;bottom:calc(var(--ph) + var(--ew) * .16 - 1px);height:calc(var(--ew) * .3);background:#b48c5f;
+    background-image:var(--grain,none),linear-gradient(0deg,rgba(0,0,0,.1),transparent);clip-path:polygon(0 100%,50% 0,100% 100%);transform-origin:bottom center}
+.lock-paper{position:relative;z-index:1;margin:0 7%;padding:34px 22px calc(var(--ph) * .66 + 28px);gap:10px}
+.lock-paper .conf{white-space:nowrap;font-size:clamp(11px,3.4vw,14px);letter-spacing:.06em}
+.lock-paper .big{font-size:clamp(38px,11vw,46px)}
+#lockMsg{min-height:28px;margin-top:2px}
+.env-pocket{position:absolute;z-index:2;left:0;right:0;bottom:0;height:var(--ph);border-radius:0 0 3px 3px;
+    background:var(--kraft);background-image:var(--grain,none),
+linear-gradient(155deg,rgba(255,255,255,.12),transparent 45%),
+linear-gradient(205deg,rgba(0,0,0,.08),transparent 50%);
+    clip-path:polygon(0 0,50% 44%,100% 0,100% 100%,0 100%)}
+/* the fold lines where the side flaps meet the bottom flap */
+.env-pocket::before{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1px),rgba(90,60,30,.22) 50%,transparent calc(50% + 1px)) left/50% 100% no-repeat,
+linear-gradient(to top left,transparent calc(50% - 1px),rgba(90,60,30,.22) 50%,transparent calc(50% + 1px)) right/50% 100% no-repeat}
+.env-pocket .postmark{top:auto;right:12px;bottom:12px;width:160px;height:66px}
+.env-pocket .lock-stamp{right:2px;top:-6px;transform:rotate(4deg)}
+.env-pocket .postmark .pm{right:40px;top:0;width:118px;transform:rotate(-8deg)}
+.nw{white-space:nowrap}
+.lock-env > .seal-btn{position:absolute;z-index:3;left:50%;bottom:calc(var(--ph) * .56 - 35px);margin-left:-35px}
+/* opening: the flap is already open, so the letter just slides up out of the pocket while the seal cracks */
+#lock.opening .lock-flap{transform:none}
+#lock.opening .lock-paper{transform:translateY(-34px)}
+@media (max-height:640px){.lock-paper{padding-top:24px}.lock-env{--ph:calc(var(--ew) * .42)}}
