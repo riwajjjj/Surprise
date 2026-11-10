@@ -168,6 +168,13 @@ window.CONFIG = {
         body: "a year ago u were my friend and i had no idea any of this would happen. during that year i never thought i would get so close with you, and then 07.10 happened.\n\nthis past month has honestly been one of the happiest ones for me. i made this little book bcz i wanted u to have something to come back to whenever u miss us.\n\nure my girlfriend, my best friend, the person i wanna share these things with. i love you for you.\n\ni hope one day u see urself the way i see u. not just as someone who is loved, but as someone who deserves every bit of it. u dont have to earn it, u dont have to prove anything. u are worth loving simply bcz u are u.\n\ni think the scariest part of liking u for so long was the thought of losing my best friend if i said something. and now i get to have both. u didnt just say yes to me, u trusted me with ur heart and with our friendship at the same time. i will never take that for granted.\n\nthis is only volume one. i cant wait to fill the next pages with u.\n\nand at last i love you so soo much i hope you know that."
     },
 
+    // BOUQUET: a little button at the very end. Tapping it wraps, shakes, unwraps and pops out a bouquet of roses, lilies and tulips. null = off.
+    bouquet: {
+        button: "one more thing…",               // handwritten on the button
+        title: "for you ♡",                      // shown when it pops
+        note: "you got your first flowers on 01.11. these ones never wilt ♡"   // on the kraft tag that swings in
+    },
+
     // a sealed envelope at the very end that only opens on a date. null = off.
     // To turn it on: sealedLetter: { opensOn: "07.10.2027", title: "our first year", body: "..." }
     sealedLetter: null

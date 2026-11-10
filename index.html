@@ -166,6 +166,18 @@
         <span class="end-seal"><svg class="tulip-g" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z"/><path class="tg-stem" d="M12 14v6.5"/><path d="M12 19.2c-2.6-.2-4.2-1.7-4.8-3.8 2.4.2 4 1.5 4.8 3.8z"/></svg></span>
         <p class="end-title">the end <em>of volume one</em></p>
         <span class="hand" id="footer"></span>
+        <button class="bq-btn" id="bqBtn" hidden aria-haspopup="dialog">
+            <svg class="mini" viewBox="0 0 60 72" aria-hidden="true">
+                <path d="M24 40 20 20M30 40V12M36 40 40 20" stroke="#3d7a5d" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <g fill="#d47a90"><path transform="translate(10 12) scale(.9)" d="M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z"/></g>
+                <g fill="#8a1c2e"><path transform="translate(19 3)" d="M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z"/></g>
+                <g fill="#e3a23a"><path transform="translate(29 12) scale(.9)" d="M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z"/></g>
+                <path d="M30 70 13 32Q30 38 47 32Z" fill="#c9a377"/><path d="M30 70 13 32 30 44Z" fill="#d9b88c"/>
+                <circle cx="30" cy="48" r="3.4" fill="#8a1c2e"/><path d="M29 50 25 60M31 50 35 60" stroke="#8a1c2e" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="bq-btn-txt"></span>
+            <span class="type tiny">tap to open</span>
+        </button>
         <div class="sealed" id="sealed" hidden></div>
     </footer>
 </main>
@@ -204,6 +216,7 @@
 
 <dialog id="lightbox"><div class="lb-inner"><img id="lbImg" alt=""><span class="date-stamp" id="lbStamp"></span><p class="hand" id="lbCap"></p><button class="lb-close type" id="lbClose">close ×</button></div></dialog>
 <dialog id="letterBox"><div class="stage" id="stage"></div></dialog>
+<dialog id="bouquetBox" aria-label="A bouquet for you"><div class="bq" id="bq"></div></dialog>
 
 <script src="config.js"></script>
 <script src="script.js"></script>
