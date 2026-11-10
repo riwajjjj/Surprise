@@ -105,3 +105,12 @@
 .bq-actions button:hover{color:#fff}
 @media (max-height:640px){.bq-line{font-size:28px;min-height:32px}.bq-tag p{font-size:21px}}
 @media (max-width:420px){.bq-tag p{font-size:22px}.bq-tag{padding:11px 14px 10px 34px}}
+
+/* bigger screens (laptops, tablets): the bouquet grows to use the space, and the tag hangs off its lower right
+   instead of sitting underneath, so the flowers get the extra height. Phones are unchanged. */
+@media (min-width:700px) and (min-height:560px){
+    #bouquetBox{width:min(680px,calc(100vw - 40px))}
+    .bq-art{width:min(100%,calc((100dvh - 120px) * .714))}
+    .bq-tag{position:absolute;right:0;bottom:64px;margin:0;max-width:min(300px,44%);transform-origin:20% -40px}
+    .bq-tag p{font-size:24px}
+}
