@@ -137,6 +137,12 @@
                 $("#gardenSub").textContent = n === 1 ? `${stage} · it blooms on ${ddmm(1)} ♡` : `tulip no. ${n} is ${stage} · it blooms on ${ddmm(n)} ♡`;
             }
             svg.setAttribute("aria-label", $("#gardenCap").textContent);
+            // the planting diary beside the window: the last few tulips, and the one that's coming
+            const tag = (label, text) => `<div class="m m-tag"><span class="hole"></span><span class="lbl">${label}</span><span class="val">${text}</span></div>`;
+            let diary = "";
+            for (let i = Math.max(1, n - 2); i <= n; i++)
+                diary += tag(`tulip no. ${i}`, i < n ? `planted ${ddmm(i - 1)} · bloomed ${ddmm(i)} ♡` : `planted ${ddmm(i - 1)} · blooms ${ddmm(i)}`);
+            $("#gardenLog").innerHTML = `<p class="hand garden-log-title">planting diary</p>${diary}${tag("next seed", `no. ${n + 1} goes in on ${ddmm(n)}`)}`;
         }
         let grown = reduceMotion;
         caption(); draw(grown ? 1 : 0);

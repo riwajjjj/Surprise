@@ -25,7 +25,7 @@ function popHearts(host, n, { x = 100, y = [70, 160], spin = 30, step = .05, siz
 const TEST = (() => { try { return new URLSearchParams(location.search); } catch (e) { return new URLSearchParams(); } })();
 // open the site once with ?reset at the end of the address to wipe your test runs (opened letters, ticked boxes, player size…)
 if (TEST.has("reset")) {
-    try { ["opened", "someday", "deckMin", "bgMuted", "nightNote"].forEach(k => localStorage.removeItem(k)); } catch (e) {}
+    try { ["opened", "someday", "torn", "deckMin", "bgMuted", "nightNote"].forEach(k => localStorage.removeItem(k)); } catch (e) {}
     try { history.replaceState(null, "", location.pathname); } catch (e) {}
 }
 const onWidthChange = fn => { let w = innerWidth; addEventListener("resize", () => { if (innerWidth !== w) { w = innerWidth; fn(); } }); };

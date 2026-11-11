@@ -112,12 +112,15 @@
             <span class="label-tape">that night</span>
             <span class="hand note">the real sky over Kathmandu, the moment you said yes</span>
         </div>
-        <div class="sky-card" id="skyCard">
-            <span class="washi" style="--wash:var(--sky);top:-12px;left:calc(50% - 48px);transform:rotate(3deg)"></span>
-            <svg id="skyChart" viewBox="0 0 420 420" role="img"></svg>
-            <p class="type sky-when" id="skyWhen"></p>
-            <p class="hand sky-cap">the night you said yes ♡</p>
-            <div class="sky-moon" id="skyMoon"></div>
+        <div class="sky-wrap">
+            <div class="sky-card" id="skyCard">
+                <span class="washi" style="--wash:var(--sky);top:-12px;left:calc(50% - 48px);transform:rotate(3deg)"></span>
+                <svg id="skyChart" viewBox="0 0 420 420" role="img"></svg>
+                <p class="type sky-when" id="skyWhen"></p>
+                <p class="hand sky-cap">the night you said yes ♡</p>
+                <p class="type sky-hint">tap the sky to make a wish ✦</p>
+            </div>
+            <div class="sky-notes" id="skyNotes"></div>
         </div>
     </section>
 
@@ -139,6 +142,7 @@
         <div class="notes-wrap">
             <div class="notes" id="notes"></div>
             <p class="type small" id="noteCount" aria-live="polite"></p>
+            <div class="note-pile" id="notePile" aria-hidden="true"></div>
         </div>
     </section>
 
@@ -148,11 +152,14 @@
             <span class="label-tape">our little garden</span>
             <span class="hand note">a new tulip blooms every month we're together</span>
         </div>
-        <div class="garden" id="gardenCard">
-            <span class="washi" style="--wash:var(--sage);top:-12px;left:calc(50% - 48px);transform:rotate(-4deg)"></span>
-            <svg id="gardenSvg" viewBox="0 0 300 300" role="img" aria-label="a tulip growing in a pot"></svg>
-            <p class="hand garden-cap" id="gardenCap"></p>
-            <p class="type small garden-sub" id="gardenSub"></p>
+        <div class="garden-wrap">
+            <div class="garden" id="gardenCard">
+                <span class="washi" style="--wash:var(--sage);top:-12px;left:calc(50% - 48px);transform:rotate(-4deg)"></span>
+                <svg id="gardenSvg" viewBox="0 0 300 300" role="img" aria-label="a tulip growing in a pot"></svg>
+                <p class="hand garden-cap" id="gardenCap"></p>
+                <p class="type small garden-sub" id="gardenSub"></p>
+            </div>
+            <div class="garden-log" id="gardenLog"></div>
         </div>
     </section>
 

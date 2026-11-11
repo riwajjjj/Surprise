@@ -4,11 +4,10 @@ const openLetter = (() => {
     /* ---------- envelopes: the flap lifts and the letter slides out ---------- */
     const box = $("#letterBox"), stage = $("#stage");
     let opened = {}; try { opened = JSON.parse(localStorage.getItem("opened") || "{}"); } catch (e) {}
-    const stamps = ["♡", "✿", "☾", "✦", "♡", "❀"];
     const envColors = ["#e8d3b2", "#dfc6a5", "#ebc3cb"];
     $("#envelopes").innerHTML = C.letters.map((l, i) =>
         `<button class="env rv${opened[i] ? " read" : ""}" data-i="${i}" style="--r:${tilt(3).toFixed(1)}deg" aria-label="Open when ${esc(l.when)}">
-    <span class="postage"><i>${stamps[i % stamps.length]}</i></span><span class="wax">${TULIP}</span>
+    <span class="peek"></span><span class="wax">${TULIP}</span>
     <span class="to"><small>open when</small>${esc(l.when)}</span></button>`).join("");
     let timers = [];
     function openLetter(toLine, body, sig, color) {

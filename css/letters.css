@@ -1,25 +1,52 @@
 /* letters.css: open-when envelopes and the letter-opening animation */
 
-/* ---------- open-when envelopes ---------- */
-.envelopes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:30px 26px}
-.env{position:relative;aspect-ratio:3/2;background:var(--kraft);text-align:left;overflow:visible;
-    box-shadow:0 18px 26px -18px rgba(40,25,15,.65);transform:rotate(var(--r,0deg));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.env:nth-child(3n+2){background:#dfc6a5}
-.env:nth-child(3n){background:var(--rose)}
-.kraft .env{box-shadow:0 18px 26px -16px rgba(60,35,15,.7)}
-.kraft .env:nth-child(3n+1){background:#e8d3b2}
+/* ---------- open-when envelopes: a loose pile of sealed letters, each with a label stuck on ---------- */
+.envelopes{display:grid;grid-template-columns:repeat(3,minmax(0,270px));justify-content:center;gap:62px 46px;padding:14px 0 26px}
+.env{--ec:#e8d3b2;--flap:52%;position:relative;aspect-ratio:3/2;text-align:left;
+    transform:rotate(var(--r,0deg));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.env:nth-child(3n+2){--ec:#dfc6a5}
+.env:nth-child(3n){--ec:var(--rose)}
 .env:hover{transform:rotate(0deg) translateY(-6px)}
-.env::before{content:"";position:absolute;inset:0 0 38% 0;background:rgba(0,0,0,.08);clip-path:polygon(0 0,100% 0,50% 100%)}
-.env::after{content:"";position:absolute;inset:auto 0 0 0;height:62%;background:rgba(255,255,255,.08);clip-path:polygon(0 100%,50% 18%,100% 100%)}
-.env .wax{top:46%}
+/* the body, with the two fold lines running up from the bottom corners */
+.env::after{content:"";position:absolute;inset:0;z-index:2;border-radius:3px;background-color:var(--ec);
+    background-image:var(--grain,none),
+    linear-gradient(to top right,transparent calc(50% - 1px),rgba(90,60,30,.2) 50%,transparent calc(50% + 1px)),
+    linear-gradient(to top left,transparent calc(50% - 1px),rgba(90,60,30,.2) 50%,transparent calc(50% + 1px)),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.07));
+    background-size:auto,50% 54%,50% 54%,100% 100%;background-position:0 0,left bottom,right bottom,0 0;background-repeat:repeat,no-repeat,no-repeat,no-repeat;
+    box-shadow:0 18px 26px -16px rgba(60,35,15,.7)}
+/* the pointed flap (a triangle drawn with gradients, so it can cast a shadow) */
+.env::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--flap);z-index:3;transform-origin:top center;
+    background:
+            linear-gradient(to top right,transparent calc(50% - .6px),rgba(255,255,255,.16) calc(50% + .6px)) left/50.2% 100% no-repeat,
+            linear-gradient(to top left,transparent calc(50% - .6px),rgba(255,255,255,.16) calc(50% + .6px)) right/50.2% 100% no-repeat,
+            linear-gradient(to top right,transparent calc(50% - .6px),var(--ec) calc(50% + .6px)) left/50.2% 100% no-repeat,
+            linear-gradient(to top left,transparent calc(50% - .6px),var(--ec) calc(50% + .6px)) right/50.2% 100% no-repeat;
+    filter:drop-shadow(0 3px 3px rgba(60,35,15,.3));transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+.env:not(.read):hover::before{transform:perspective(500px) rotateX(-26deg)}   /* it lifts a little when she hovers */
+.env .wax{top:calc(var(--flap) - 2%);z-index:5}
+.env .postage,.env .rubber{z-index:4}
+/* the label stuck across the bottom */
+.env .to{position:absolute;left:8%;right:8%;bottom:-13px;z-index:4;padding:7px 10px 9px;text-align:center;text-wrap:balance;
+    background:var(--card);background-image:var(--grain,none);font-family:var(--f-hand),cursive;font-size:25px;line-height:1;color:#2f2620;
+    transform:rotate(-1.5deg);box-shadow:0 1px 2px rgba(40,25,15,.2),0 7px 9px -6px rgba(40,25,15,.5)}
+.env:nth-child(even) .to{transform:rotate(1.3deg)}
+.env .to small{display:block;font-family:var(--f-type),monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cherry);margin-bottom:4px}
+/* once she has opened one: the flap stays up, the seal is broken, the letter peeks out */
+.env .peek{position:absolute;left:9%;right:9%;top:-13%;height:60%;z-index:1;opacity:0;transform:translateY(34%);
+    background:var(--card);background-image:repeating-linear-gradient(transparent 0 9px,rgba(80,120,160,.25) 9px 10px);background-position:0 7px;
+    box-shadow:0 1px 2px rgba(40,25,15,.25);transition:transform .6s cubic-bezier(.3,1.3,.5,1) .15s,opacity .2s ease .15s}
+.env.read .peek{opacity:1;transform:none}
+.env.read::before{z-index:0;transform:scaleY(-.6);filter:brightness(.88)}
 .env.read .wax{transform:rotate(-24deg) translate(6px,8px);opacity:.75;clip-path:polygon(0 0,62% 0,40% 46%,70% 100%,0 100%)}
-.env .to{position:absolute;left:16px;bottom:10px;right:70px;z-index:2;font-family:var(--f-hand),cursive;font-size:27px;line-height:1;color:#2f2620}
-.env .to small{display:block;font-family:var(--f-type),monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:4px}
-@media (max-width:560px){ /* two per row on phones */
-    .envelopes{grid-template-columns:1fr 1fr;gap:18px 12px}
-    .env .to{font-size:20px;left:10px;right:10px}
-    .env .to small{font-size:9px}
-    .env .wax{top:36%}
+
+@media (min-width:861px){.envelopes .env:nth-child(3n+2){margin-top:28px}}   /* the middle column sits a little lower, like a casual pile */
+@media (max-width:860px){.envelopes{grid-template-columns:repeat(2,minmax(0,270px));gap:58px 30px}}
+@media (max-width:560px){
+    .envelopes{gap:46px 14px}
+    .env{--flap:48%;aspect-ratio:5/4}
+    .env .to{font-size:19px;bottom:-11px;left:5%;right:5%;padding:6px 6px 7px}
+    .env .to small{font-size:8.5px;margin-bottom:3px}
 }
 
 

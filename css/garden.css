@@ -13,3 +13,20 @@
 #gardenSvg .g-day{transition:opacity 2s}
 #gardenSvg .g-night{opacity:0;transition:opacity 2s}
 #gardenSvg stop{transition:stop-color 2s}
+
+/* ---------- the planting diary: kraft tags beside the window, one per tulip ---------- */
+.garden-wrap{display:grid;grid-template-columns:minmax(0,360px) minmax(0,270px);gap:clamp(36px,6vw,80px);justify-content:center;align-items:center}
+.garden-wrap .garden{width:100%}
+.garden-log{display:grid;gap:16px}
+.garden-log-title{margin:0 0 2px;font-size:30px;line-height:1;color:#2c5444;transform:rotate(-2deg)}
+.garden-log .m-tag:nth-child(even){--r:-2deg}
+.garden-log .m-tag:nth-child(odd){--r:1.5deg;margin-left:14px}
+.garden-log .m-tag:last-child{background-color:#e8d6b9;opacity:.85}
+.garden-log .m-tag .val{font-size:22px}
+@media (max-width:760px){
+    .garden-wrap{grid-template-columns:minmax(0,360px);gap:30px}
+    .garden-wrap .garden{width:92%;margin:0 auto}
+    .garden-log{width:86%;margin:0 auto}
+    .garden-log-title{text-align:center}
+    .garden-log .m-tag:nth-child(odd){margin-left:0}
+}

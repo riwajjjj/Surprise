@@ -53,6 +53,11 @@ window.CONFIG = {
     ],
     friendsSince: "2025",                // when you became friends (shown on the ticket)
     sky: true,                           // "that night": the real star chart of the sky over Kathmandu at 00:55 on 07.10.2026 (false to hide)
+    // the handwritten notes taped beside the star chart (the moon note is added on its own). Delete one to remove it.
+    skyNotes: [
+        "Saturn was there, three nights after its brightest night of the whole year. even the planets showed up for us",
+        "two meteor showers were going on that night. the sky was literally throwing confetti",
+    ],
     garden: true,                        // "our little garden": a new tulip every month, each one blooms on your monthly anniversary (false to hide)
     nightMode: true,                     // after 11pm (Kathmandu time) the site dims, stars come out and a goodnight note pops up once a night (false = off)
     nightNote: "it’s late. go to sleep, i’ll still be here tomorrow ♡",

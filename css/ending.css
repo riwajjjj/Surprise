@@ -11,10 +11,10 @@ footer .hand{font-size:30px;color:var(--soft)}
 
 #sealed{display:grid;justify-items:center;gap:12px;margin-top:46px}
 .sealed-kicker{margin:0;font-size:28px;color:var(--soft);transform:rotate(-2deg)}
-#sealed .env{width:min(320px,86vw);background:#ecd9bd;--r:-2deg}
-#sealed .env .to{left:16px;right:70px;bottom:12px;font-size:27px}
-#sealed .env .to small{font-size:11px}
-#sealed .wax{width:46px;height:46px;margin:-23px;font-size:18px;top:50%}
+#sealed .env{width:min(320px,86vw);--ec:#ecd9bd;--flap:52%;--r:-2deg;aspect-ratio:3/2;margin-bottom:14px}
+#sealed .env .to{font-size:25px}
+#sealed .env .to small{font-size:10px}
+#sealed .wax{width:46px;height:46px;margin:-23px;font-size:18px}
 #sealed .postage{width:44px;height:54px;right:12px;top:12px}
 #sealed .postage i{width:32px;height:40px;font-size:18px}
 #sealed.ready .wax{animation:pulse 1.8s ease-in-out infinite}
