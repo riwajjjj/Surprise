@@ -68,9 +68,10 @@
             return `<i style="--px:${(Math.random() * 100).toFixed(0)}%;--pw:${(8 + Math.random() * 7).toFixed(0)}px;--pc:${b};--pc2:${a};--sx:${(Math.random() * 60 - 30).toFixed(0)}px;--fh:${fh}px;--pd:${(6 + Math.random() * 5).toFixed(1)}s;--pdl:${(.3 + Math.random() * 5).toFixed(1)}s"></i>`; }).join("");
     }
 
-    let T = [];
+    let T = [], run = 0;
     async function play() {
         T.forEach(clearTimeout); T = [];
+        const me = ++run;                                                                  // a newer play (or close) cancels this one
         stage.className = "bq"; line.textContent = ""; burstBox.innerHTML = ""; rain.innerHTML = "";
         void stage.offsetWidth;
         const title = B.title || "for you ♡";
@@ -81,17 +82,17 @@
         at(750, () => { stage.classList.add("b2"); line.textContent = "wait for it…"; });   // it shakes, harder and harder
         await ready;                                                                       // (pictures are almost always ready by now)
         const go = Math.max(0, 2150 - (performance.now() - t0));
-        if (!dlg.open) return;
+        if (!dlg.open || me !== run) return;
         at(go, () => { stage.classList.add("b3"); line.textContent = ""; });              // the paper fans open
         at(go + 450, () => stage.classList.add("b4"));                                    // greenery bursts out, stems rise, buds appear
         at(go + 1700, () => stage.classList.add("b5"));                                   // the flowers bloom, from the middle outwards
         at(go + 3500, () => stage.classList.add("b6"));                                   // the ribbon wraps round and the bow ties
         at(go + 4100, () => { stage.classList.add("b7"); line.textContent = title; pop(); }); // POP
     }
-    const close = () => { T.forEach(clearTimeout); T = []; dlg.close(); };
+    const close = () => { run++; T.forEach(clearTimeout); T = []; dlg.close(); };
     btn.addEventListener("click", () => { dlg.showModal(); play(); });
     stage.querySelector('[data-a="again"]').addEventListener("click", play);
     stage.querySelector('[data-a="close"]').addEventListener("click", close);
     dlg.addEventListener("click", e => { if (e.target === dlg) close(); });
-    dlg.addEventListener("close", () => { T.forEach(clearTimeout); T = []; rain.innerHTML = ""; });
+    dlg.addEventListener("close", () => { if (dlg.open) return; run++; T.forEach(clearTimeout); T = []; rain.innerHTML = ""; });   // (this event arrives a moment late: ignore it if she already reopened)
 })();

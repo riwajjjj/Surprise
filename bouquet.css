@@ -22,7 +22,7 @@
 @keyframes bqTitle{from{transform:scale(.6);opacity:0}}
 
 /* the bouquet always fits on the screen, phone or laptop */
-.bq-art{position:relative;width:min(95%,calc((100dvh - 230px) * .714));margin-top:-6px}
+.bq-art{position:relative;width:min(95%,calc((100vh - 230px) * .714));width:min(95%,calc((100dvh - 230px) * .714));margin-top:-6px}
 .bq-stage{position:relative;z-index:1;width:100%;opacity:0;transform-origin:50% 86%;
     transform:translateY(-70px) scale(.62) rotate(-9deg);transition:opacity .4s ease,transform .8s cubic-bezier(.3,1.45,.5,1)}
 .bq.b1 .bq-stage{opacity:1;transform:none}
@@ -110,7 +110,7 @@
    instead of sitting underneath, so the flowers get the extra height. Phones are unchanged. */
 @media (min-width:700px) and (min-height:560px){
     #bouquetBox{width:min(680px,calc(100vw - 40px))}
-    .bq-art{width:min(100%,calc((100dvh - 120px) * .714))}
+    .bq-art{width:min(100%,calc((100vh - 120px) * .714));width:min(100%,calc((100dvh - 120px) * .714))}
     .bq-tag{position:absolute;right:0;bottom:64px;margin:0;max-width:min(300px,44%);transform-origin:20% -40px}
     .bq-tag p{font-size:24px}
 }

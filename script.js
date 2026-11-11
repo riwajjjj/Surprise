@@ -6,6 +6,11 @@
     const pad = n => String(n).padStart(2, "0");
     // test mode (for you, not her): add ?days=60 to the address to see the garden 60 days in, or ?night to see night mode now
     const TEST = (() => { try { return new URLSearchParams(location.search); } catch (e) { return new URLSearchParams(); } })();
+    // open the site once with ?reset at the end of the address to wipe your test runs (opened letters, ticked boxes, player size…)
+    if (TEST.has("reset")) {
+        try { ["opened", "someday", "deckMin", "bgMuted", "nightNote"].forEach(k => localStorage.removeItem(k)); } catch (e) {}
+        try { history.replaceState(null, "", location.pathname); } catch (e) {}
+    }
     const onWidthChange = fn => { let w = innerWidth; addEventListener("resize", () => { if (innerWidth !== w) { w = innerWidth; fn(); } }); };
 
     /* ---------- time zone: every date on the site follows C.timeZone (e.g. Kathmandu), wherever it's opened ---------- */
@@ -114,7 +119,7 @@
 
     /* ---------- always start at the top, no scrolling until the book is open ---------- */
     try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
-    const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    const toTop = () => { try { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); } catch (e) { window.scrollTo(0, 0); } };   // older Safari doesn't know "instant"
     toTop();
     window.addEventListener("pageshow", toTop);
     document.documentElement.classList.add("locked");
@@ -515,7 +520,7 @@
     }).join("")}</span>`).join(`<span class="sp"></span>`);
     $("#byline").innerHTML = `for ${esc(C.to)}, from ${esc(C.from)}<svg class="doodle d-tulip" viewBox="0 0 40 50" aria-hidden="true"><path d="M20 47V27"/><path d="M20 27c-7 0-10-6-10-15l5 4 5-7 5 7 5-4c0 9-3 15-10 15z"/><path d="M20 41c-4-1-7-4-8-9 4 0 7 3 8 9z"/></svg>`;
     const sinceN = C.since.replace(/\D/g, "");
-    $("#ticket").innerHTML = `<div class="main"><span>admit two · friends since ${esc(C.friendsSince || "")}</span><b>US, OFFICIALLY</b><span>since ${esc(C.since)}</span></div>
+    $("#ticket").innerHTML = `<div class="main"><span>admit two · <span class="nw">friends since ${esc(C.friendsSince || "")}</span></span><b>US, OFFICIALLY</b><span>since ${esc(C.since)}</span></div>
   <div class="stub"><span>no.</span><b>${esc(sinceN.slice(0, 6))}</b><span>row ♡</span></div>`;
     /* ---------- live "together for" counter ---------- */
     (function counter() {

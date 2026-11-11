@@ -1148,3 +1148,16 @@ linear-gradient(to top left,transparent calc(50% - 1px),rgba(90,60,30,.22) 50%,t
 #lock.opening .lock-flap{transform:none}
 #lock.opening .lock-paper{transform:translateY(-34px)}
 @media (max-height:640px){.lock-paper{padding-top:24px}.lock-env{--ph:calc(var(--ew) * .42)}}
+/* =====================================================================
+   v21: final touch-ups
+   ===================================================================== */
+/* laptops/tablets: the cassette and the xoxo sticker no longer cover the cover photo's caption,
+   and the polaroid sits on top of the photo-booth strip */
+@media (min-width:561px){
+    .hero-collage{min-height:600px}
+    .hero-pol{z-index:3}
+    .hero .cassette{left:-1%;bottom:0}
+    .sticker{right:0;bottom:2%}
+}
+/* phones: small mementos fill the gap beside a lone photo instead of leaving a hole */
+@media (max-width:760px){.collage.free{grid-auto-flow:row dense}}

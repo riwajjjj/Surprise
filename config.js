@@ -34,8 +34,8 @@
 window.CONFIG = {
     password: "0710",                    // set to "" to remove the lock
     passwordHint: "the day we first got together (day · month)",   // a 4-number password shows as a little combination lock
-    wrongAnswers: ["nope ♡ try again", "think harder, i'll wait", "hmm, do you not remember?? 😤"],   // shown one by one on wrong tries
-    lastHint: "it's the night you said yes (00:55) ♡",   // shown after all the wrong answers above
+    wrongAnswers: ["nope ♡ try again", "think harder, i’ll wait", "hmm, do you not remember?? 😤"],   // shown one by one on wrong tries
+    lastHint: "it’s the night you said yes (00:55) ♡",   // shown after all the wrong answers above
     postmarkCity: "KATHMANDU",           // the postmark on the envelope
     postmarkDate: "",                    // the date on the postmark, e.g. "14.11.2026" ("" = the day she opens it). Never use your 'since' date: it's the password!
     title: "you & me",                   // the cut-out letters in the hero
@@ -54,7 +54,7 @@ window.CONFIG = {
     friendsSince: "2025",                // when you became friends (shown on the ticket)
     garden: true,                        // "our little garden": a new tulip every month, each one blooms on your monthly anniversary (false to hide)
     nightMode: true,                     // after 11pm (Kathmandu time) the site dims, stars come out and a goodnight note pops up once a night (false = off)
-    nightNote: "it's late. go to sleep, i'll still be here tomorrow ♡",
+    nightNote: "it’s late. go to sleep, i’ll still be here tomorrow ♡",
     // her favourite songs, played like a mixtape. Put the files in the audio/ folder.
     // Add as many as you like; they play in order and loop. artist can be left "".
     playlist: [
@@ -112,9 +112,9 @@ window.CONFIG = {
             mementos: [
                 { type: "tag", label: "my favourite moment with you", text: "the first time you said i love you" },
                 { type: "tag", label: "your comfort song", text: "Love Story (it’s track one for a reason)" },
-                { type: "tag", label: "when you're tired", text: "you go quiet and lean on me" },
+                { type: "tag", label: "when you’re tired", text: "you go quiet and lean on me" },
                 { type: "tag", label: "your favourite flower", text: "tulip (one day)" },
-                { type: "tag", label: "the face you make", text: "when we don't have anything to talk about" },
+                { type: "tag", label: "the face you make", text: "when we don’t have anything to talk about" },
                 { type: "sticker", text: "100%<br>you", heart: true }
             ]
         }
@@ -129,23 +129,23 @@ window.CONFIG = {
         "you said yes to a multiple choice question",
         "with you, I never have to pretend",
         "you notice every time I feel off, and you always know how to fix it",
-        "you're the first person I want to tell everything to",
+        "you’re the first person I want to tell everything to",
         "you make ordinary days feel like something I’ll remember",
         "you know the worst version of me and still picked me",
         "you make me want to be better without ever asking me to",
         "I don’t just love you. I like who I am when I’m with you",
-        "you're the most lovable person I know, and you make me feel loved in return",
+        "you’re the most lovable person I know, and you make me feel loved in return",
         "you’re strong in ways you don’t give yourself credit for",
         "I’d pick you on every version of every day"
     ],
 
     letters: [
-        { when: "you miss me", body: "Hi, it's me.\nIf you're reading this, you miss me. I miss you too, probably more than I say.\nWhen we were just friends, I didn't notice how much I looked forward to you. Now I notice it every day. You're the first person I want to talk to when something happens, good or bad.\nSo text me. Even if it's just a 'hi'. It means more than you think." },
-        { when: "you've had a long day", body: "Whatever happened today, you did enough.\nAnd when you're ready, tell me about it. I don't need you to be okay all the time. I just want to be the person you come to when you're not." },
-        { when: "you can't sleep", body: "You’re overthinking again, aren’t you.\nHere’s something better to think about instead: remember the day when we confessed to each other.\nI go back to that one when I can’t sleep. It works for me, so maybe it’ll work for you.\nIf it doesn’t, you know I’ll pick up." },
-        { when: "you're bored", body: "Okay, a question for you to think about:\nIf we could go anywhere for one day, just us, where would you pick?\nDon’t overthink it. Text me your answer.\nI already know mine, and I want to see if we pick the same place." },
-        { when: "you doubt yourself", body: "I've known you long enough to be sure about this.\nYou always think you can't, and then you do.\nI believe in you, even on the days you don't." },
-        { when: "you need to smile", body: "If you need a reason to smile today, here's one: you make me really, really happy just by being in my life." }
+        { when: "you miss me", body: "Hi, it’s me.\nIf you’re reading this, you miss me. I miss you too, probably more than I say.\nWhen we were just friends, I didn’t notice how much I looked forward to you. Now I notice it every day. You’re the first person I want to talk to when something happens, good or bad.\nSo text me. Even if it’s just a 'hi'. It means more than you think." },
+        { when: "you’ve had a long day", body: "Whatever happened today, you did enough.\nAnd when you’re ready, tell me about it. I don’t need you to be okay all the time. I just want to be the person you come to when you’re not." },
+        { when: "you can’t sleep", body: "You’re overthinking again, aren’t you.\nHere’s something better to think about instead: remember the day when we confessed to each other.\nI go back to that one when I can’t sleep. It works for me, so maybe it’ll work for you.\nIf it doesn’t, you know I’ll pick up." },
+        { when: "you’re bored", body: "Okay, a question for you to think about:\nIf we could go anywhere for one day, just us, where would you pick?\nDon’t overthink it. Text me your answer.\nI already know mine, and I want to see if we pick the same place." },
+        { when: "you doubt yourself", body: "I’ve known you long enough to be sure about this.\nYou always think you can’t, and then you do.\nI believe in you, even on the days you don’t." },
+        { when: "you need to smile", body: "If you need a reason to smile today, here’s one: you make me really, really happy just by being in my life." }
     ],
 
     someday: [
