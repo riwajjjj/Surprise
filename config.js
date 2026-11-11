@@ -67,7 +67,8 @@ window.CONFIG = {
         { src: "audio/Love-Story.mp3", title: "Love Story", artist: "Taylor Swift" },
         { src: "audio/Blank-Space.mp3", title: "Blank Space", artist: "Taylor Swift" },
         { src: "audio/Putali.mp3", title: "Putali", artist: "The Elements" },
-        { src: "audio/Mockingbird.mp3", title: "Mockingbird", artist: "Eminem" }
+        { src: "audio/Mockingbird.mp3", title: "Mockingbird", artist: "Eminem" },
+        { src: "audio/Risk.mp3", title: "Risk", artist: "Gracie Abrams" }
     ],
     mixtapeTitle: "songs for you",        // handwritten on the big cassette
     autoplayMusic: true,                  // start the mixtape softly when she opens the book
