@@ -1161,6 +1161,32 @@
         };
     })();
 
+    /* ---------- the tab misses her when she looks away ---------- */
+    (function missYou() {
+        const real = document.title;
+        document.addEventListener("visibilitychange", () => { document.title = document.hidden ? "come back ♡" : real; });
+    })();
+
+    /* ---------- the xoxo sticker: tap it for hearts ---------- */
+    (function xoxo() {
+        const st = document.querySelector(".hero .sticker"); if (!st) return;
+        st.setAttribute("role", "button"); st.tabIndex = 0; st.title = "tap me ♡";
+        const cols = ["#8a1c2e", "#b0384e", "#e07a8f", "#ebc3cb", "#2f6f55"];
+        function hearts() {
+            st.classList.remove("boop"); void st.offsetWidth; st.classList.add("boop");
+            if (reduceMotion) return;
+            for (let i = 0; i < 12; i++) {
+                const h = document.createElement("span");
+                h.className = "pop-heart"; h.textContent = "♥"; h.setAttribute("aria-hidden", "true");
+                h.style.cssText = `--hx:${(Math.random() * 160 - 80).toFixed(0)}px;--hy:${(-60 - Math.random() * 90).toFixed(0)}px;--hr:${(Math.random() * 60 - 30).toFixed(0)}deg;--hd:${(i * .04).toFixed(2)}s;--hc:${cols[i % cols.length]};font-size:${(14 + Math.random() * 12).toFixed(0)}px;font-family:serif`;
+                h.addEventListener("animationend", () => h.remove());
+                st.appendChild(h);
+            }
+        }
+        st.addEventListener("click", hearts);
+        st.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); hearts(); } });
+    })();
+
     /* ---------- gentle reveal (only for things below the fold) ---------- */
     if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
         const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
