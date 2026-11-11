@@ -11,8 +11,8 @@
     <meta property="og:description" content="for your eyes only ♡">
     <meta property="og:type" content="website">
     <!-- so she can keep it on her home screen like an app -->
-    <link rel="manifest" href="manifest.webmanifest">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="icons/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-title" content="us ♡">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -21,8 +21,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo+Black&family=Caveat:wght@400;600&family=Courier+Prime:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=La+Belle+Aurore&family=Nanum+Pen+Script&family=Share+Tech+Mono&family=Special+Elite&display=swap">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="bouquet.css">
+    <!-- one stylesheet per part of the page, in page order (the order matters: later files win) -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/pieces.css">
+    <link rel="stylesheet" href="css/lock.css">
+    <link rel="stylesheet" href="css/cover.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/scrapbook.css">
+    <link rel="stylesheet" href="css/film.css">
+    <link rel="stylesheet" href="css/reasons.css">
+    <link rel="stylesheet" href="css/garden.css">
+    <link rel="stylesheet" href="css/letters.css">
+    <link rel="stylesheet" href="css/someday.css">
+    <link rel="stylesheet" href="css/final.css">
+    <link rel="stylesheet" href="css/ending.css">
+    <link rel="stylesheet" href="css/bouquet.css">
+    <link rel="stylesheet" href="css/music.css">
+    <link rel="stylesheet" href="css/dialogs.css">
+    <link rel="stylesheet" href="css/night.css">
+    <link rel="stylesheet" href="css/finish.css">
 </head>
 <body>
 
@@ -235,8 +253,22 @@
 <dialog id="bouquetBox" aria-label="A bouquet for you"><div class="bq" id="bq"></div></dialog>
 
 <script src="config.js"></script>
-<script src="script.js"></script>
+<!-- one script per part of the page; core.js first, the rest in page order -->
+<script src="js/core.js"></script>
+<script src="js/music.js"></script>
+<script src="js/opening.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/scrapbook.js"></script>
+<script src="js/film.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/reasons.js"></script>
+<script src="js/letters.js"></script>
+<script src="js/someday.js"></script>
+<script src="js/final.js"></script>
+<script src="js/garden.js"></script>
+<script src="js/night.js"></script>
+<script src="js/touches.js"></script>
 <script src="bouquet/manifest.js"></script>
-<script src="bouquet.js"></script>
+<script src="js/bouquet.js"></script>
 </body>
-</html>
+</html>

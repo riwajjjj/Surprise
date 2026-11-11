@@ -1,8 +1,8 @@
 {
   "name": "a little book of us",
   "short_name": "us ♡",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "../",
+  "scope": "../",
   "display": "standalone",
   "background_color": "#f3ece1",
   "theme_color": "#f3ece1",

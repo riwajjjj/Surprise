@@ -1,0 +1,16 @@
+/* reasons.css: why it's you: the pad of sticky notes */
+
+/* ---------- reasons: a pad of sticky notes ---------- */
+.notes-wrap{display:grid;justify-items:center;gap:20px}
+.notes{position:relative;width:min(380px,86vw);aspect-ratio:1/1}
+.notes::after{content:"";position:absolute;left:50%;top:-10px;width:22px;height:22px;margin-left:-11px;border-radius:50%;z-index:99;
+    background:radial-gradient(circle at 35% 30%,#ff8b95,var(--cherry) 55%,var(--cherry-2));box-shadow:2px 5px 5px rgba(0,0,0,.35)}
+.sticky{position:absolute;inset:0;padding:clamp(28px,6vw,42px);display:grid;align-content:space-between;text-align:left;cursor:pointer;
+    background:var(--c,var(--butter));box-shadow:0 1px 1px rgba(0,0,0,.06),0 22px 30px -22px rgba(40,25,15,.7);
+    transform:rotate(var(--r)) translate(var(--x),var(--y));transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s}
+.sticky::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;background:rgba(0,0,0,.04)}
+.sticky p{margin:0;font-family:var(--f-hand),cursive;font-size:clamp(28px,4.4vw,36px);line-height:1.15;color:#2f2620}
+.sticky .num{font-family:var(--f-type),monospace;font-size:13px;color:rgba(47,38,32,.6)}
+.sticky.off{transform:rotate(24deg) translate(140%,-30%)!important;opacity:0;pointer-events:none}
+.sticky[aria-hidden="true"]{cursor:default}
+.gingham #noteCount{background:var(--card);padding:4px 12px;color:var(--soft)}

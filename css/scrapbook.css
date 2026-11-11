@@ -1,0 +1,129 @@
+/* scrapbook.css: the scrapbook pages and every kind of memento */
+
+/* ---------- scrapbook: hand-placed, overlapping collages ---------- */
+.spread{position:relative;margin-bottom:clamp(40px,6vw,70px)}
+.linen .spread{isolation:isolate}
+.spread::before{ /* a second sheet peeking out underneath */
+    content:"";position:absolute;inset:9px -7px -9px 9px;background:#cdbda3;transform:rotate(.7deg);
+    -webkit-mask:linear-gradient(#000 0 0) center/100% calc(100% - 14px) no-repeat,var(--torn) top/140px 12px repeat-x,var(--torn-b) bottom/150px 12px repeat-x;
+    mask:linear-gradient(#000 0 0) center/100% calc(100% - 14px) no-repeat,var(--torn) top/140px 12px repeat-x,var(--torn-b) bottom/150px 12px repeat-x;
+    filter:drop-shadow(0 10px 14px rgba(40,25,15,.18))}
+.spread:nth-child(even)::before{transform:rotate(-.6deg);inset:9px 9px -9px -7px}
+.linen .spread::after{content:"";position:absolute;inset:18px 10px 4px;z-index:-1;pointer-events:none;box-shadow:0 18px 26px -2px rgba(50,30,15,.3)}
+.spread-page{position:relative;z-index:1;background:var(--paper-2);padding:clamp(40px,6vw,64px) clamp(18px,4vw,48px) clamp(48px,6vw,70px)}
+.spread:nth-child(even) .spread-page{background:#efe5d6}
+.spread-page::before{ /* faint grid paper */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(111,97,88,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(111,97,88,.12) 1px,transparent 1px);background-size:26px 26px}
+.chapter{position:relative;display:flex;align-items:baseline;gap:12px;margin:0 0 30px}
+.chapter h2{position:relative;margin:0;font-family:var(--f-serif),serif;font-weight:400;font-style:italic;font-size:clamp(38px,5.5vw,62px);line-height:1;letter-spacing:-.01em}
+.chapter span{font-family:var(--f-type),monospace;font-size:14px;color:var(--soft)}
+.chapter .when{position:relative;white-space:nowrap}
+.chapter .when.circled{margin-left:12px}
+.scrawl{position:absolute;font-family:var(--f-scrawl),cursive;font-size:36px;color:var(--cherry);pointer-events:none;z-index:6}
+
+.collage{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:26px 22px;align-items:start}
+.collage > *{grid-column:span var(--span,4);margin-top:var(--mt,0)}
+.collage .rv{transition-delay:var(--d,0s)}
+.collage .rv.pre{opacity:0;transform:translateY(-46px) rotate(calc(var(--r,0deg) + 7deg)) scale(1.08)}
+
+/* a hand-drawn arrow + note beside a photo (photo: arrow: "...") */
+.pointer{position:absolute;left:calc(100% + 8px);bottom:3%;z-index:7;display:grid;justify-items:start;width:130px;pointer-events:none}
+.pointer svg{width:58px;overflow:visible}
+.pointer span{display:block;font-family:var(--f-scrawl),cursive;font-size:30px;line-height:1;color:var(--cherry);transform:rotate(-6deg);white-space:nowrap}
+.flip .pointer{left:auto;right:calc(100% + 8px);justify-items:end}
+.flip .pointer svg{transform:scaleX(-1)}
+
+/* mementos */
+.m{position:relative;transform:rotate(var(--r,0deg));filter:drop-shadow(0 10px 12px rgba(40,25,15,.28))}
+.m:hover{transform:rotate(0deg) scale(1.04)}
+.m-tag,.m-note,.m-ticket,.m-receipt,.m-chat{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+
+.m-ticket{display:grid;grid-template-columns:1fr auto;background:#e9d8b4;color:#4a3a1c;
+    -webkit-mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+    mask:radial-gradient(circle 7px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.m-ticket .a{padding:10px 10px 9px 16px;border-right:2px dashed rgba(74,58,28,.35);display:grid;gap:2px}
+.m-ticket .a span{font-family:var(--f-mono),monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.m-ticket .a b{font-family:"Archivo Black",sans-serif;font-size:17px;line-height:1.05;letter-spacing:.03em;text-transform:uppercase}
+.m-ticket .s{padding:10px 14px 9px 10px;font-family:var(--f-mono),monospace;font-size:10px;letter-spacing:.1em;writing-mode:vertical-rl;text-transform:uppercase}
+.m-ticket.red{background:var(--cherry);color:#fbe3e5}
+.m-ticket.red .a{border-color:rgba(255,230,230,.4)}
+
+.m-receipt{background:#fdfcf8;color:#3b3530;font-family:var(--f-mono),monospace;font-size:12px;line-height:1.5;padding:14px 14px 22px;
+    -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/12px 8px repeat-x;
+    mask:linear-gradient(#000 0 0) top/100% calc(100% - 8px) no-repeat,conic-gradient(from 135deg at top,#000 90deg,#0000 0) bottom/12px 8px repeat-x}
+.m-receipt b{display:block;text-align:center;text-transform:uppercase;letter-spacing:.18em;font-size:12px;margin-bottom:4px}
+.m-receipt .dt{display:block;text-align:center;font-size:10px;color:#857b70;margin-bottom:8px}
+.m-receipt .row{display:flex;justify-content:space-between;gap:8px}
+.m-receipt .row span:first-child{min-width:0;overflow-wrap:anywhere}
+.m-receipt hr{border:0;border-top:1px dashed #a89d90;margin:8px 0}
+.m-receipt .tot{font-weight:700}
+.m-receipt .thx{display:block;text-align:center;margin-top:8px;font-family:var(--f-hand),cursive;font-size:20px;color:var(--cherry)}
+
+.m-note{background:var(--card);padding:18px 16px 16px;font-family:var(--f-hand),cursive;font-size:24px;line-height:1.1;color:#2f2620;
+    background-image:repeating-linear-gradient(transparent 0 25px,rgba(80,120,160,.22) 25px 26px);background-position:0 12px}
+
+.m-sticker{justify-self:start;display:inline-grid;place-items:center;aspect-ratio:1;border-radius:50%;padding:10px;text-align:center;
+    background:var(--sc,var(--rose));color:var(--cherry-2);font-family:"Abril Fatface",serif;font-size:17px;line-height:1.05;box-shadow:0 0 0 4px #fff}
+.m-sticker.heart{border-radius:0;box-shadow:none;padding:0;color:#fff;font-size:14px;width:100%;max-width:110px;aspect-ratio:1.05;
+    background:var(--cherry);-webkit-mask:var(--heart) center/contain no-repeat;mask:var(--heart) center/contain no-repeat}
+
+.m-tag{position:relative;display:grid;gap:6px;padding:16px 16px 16px 40px;background:#d6b58a;color:#3b2a1a;
+    clip-path:polygon(16px 0,100% 0,100% 100%,16px 100%,0 calc(100% - 16px),0 16px);
+    background-image:var(--grain,none),linear-gradient(180deg,rgba(255,255,255,.12),transparent)}
+.m-tag:nth-of-type(3n){background-color:#e8d6b9}
+.m-tag .hole{position:absolute;left:14px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--paper-2);box-shadow:inset 0 0 0 2px #b99566}
+.m-tag .lbl{font-family:var(--f-mono),monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.m-tag .val{font-family:var(--f-hand),cursive;font-size:24px;line-height:1.05}
+
+.m-leaf{width:100%;max-width:120px}
+.m-leaf path{fill:#9aa67a}
+.m-leaf .vein{fill:none;stroke:#6f7b52;stroke-width:1.4}
+
+.m-chat{background:#fff;border-radius:16px;padding:12px 12px 14px;display:grid;gap:6px;
+    font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:13px;line-height:1.35;color:#222;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.chat-top{display:flex;align-items:center;gap:6px;padding-bottom:6px;margin-bottom:2px;border-bottom:1px solid #eee;font-size:11px;color:#888}
+.chat-top b{color:#222;font-size:12px;flex:1}
+.chat-top .dot{width:18px;height:18px;border-radius:50%;background:var(--rose)}
+.m-chat .b{margin:0;max-width:85%;padding:7px 11px;border-radius:16px;overflow-wrap:anywhere}
+.m-chat .them{justify-self:start;background:#ecebe8;border-bottom-left-radius:5px}
+.m-chat .me{justify-self:end;background:var(--cherry);color:#fff;border-bottom-right-radius:5px}
+
+/* a real chat screenshot, framed like a phone screen */
+.m-shot{position:relative;padding:7px;background:#211c1d;border-radius:22px;box-shadow:inset 0 0 0 1.5px #3a3335}
+.m-shot .washi{z-index:3}
+.m-shot .shot-ph{border-radius:16px;background:#fff;cursor:zoom-in}
+.m-shot .shot-ph img{height:auto;filter:none}
+.m-shot .shot-ph::after{background:linear-gradient(110deg,rgba(255,255,255,.12),transparent 35%);mix-blend-mode:normal}
+.shot-cap{display:block;padding:8px 6px 2px;text-align:center;font-family:var(--f-scrawl),cursive;font-size:24px;line-height:1;color:#f2eee8}
+
+/* laptops: everything is placed by hand (main.js fits each page to its contents) */
+@media (min-width:761px){
+    .collage.free{display:block;position:relative;aspect-ratio:var(--car,10/7.2);container-type:inline-size}
+    .collage.free > *{position:absolute;left:var(--l);top:var(--t);top:calc(var(--tw) * 1cqw);width:var(--w);margin:0;z-index:var(--z,1)}
+    .collage.free > .m{z-index:6}
+}
+/* phones: a two-column pile */
+@media (max-width:760px){
+    .spread::before{inset:7px -4px -7px 6px}
+    .spread:nth-child(even)::before{inset:7px 6px -7px -4px}
+    .collage{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}
+    .collage > *{grid-column:span 1;margin-top:0}
+    .collage > .wide{grid-column:span 2}
+    .collage.free{grid-auto-flow:row dense}   /* small mementos fill the gap beside a lone photo */
+    .collage.free > *{margin-top:-12px}
+    .collage.free > :nth-child(-n+2){margin-top:0}
+    .collage.free > .m{justify-self:center;width:92%}
+    .collage.free > .solo{grid-column:span 2;width:80%;justify-self:center}
+    .collage.free > .solo.has-arrow{width:68%;justify-self:start;margin-left:3%}
+    .collage.free > .solo.has-arrow.flip{justify-self:end;margin-left:0;margin-right:3%}
+    .collage.free > .m-chat,.collage.free > .m-receipt{grid-column:span 2;width:80%}
+    .collage.free > .m-tag{grid-column:span 2;width:84%}
+    .collage.free > .m-ticket{grid-column:span 2;width:78%;justify-self:center}
+    .collage.free > .m-shot{grid-column:span 2;width:68%;justify-self:center}
+    .m-ticket .a b{overflow-wrap:anywhere}
+    .spread-page .scrawl{position:static;display:block;text-align:right;margin-top:22px;transform:rotate(-3deg)!important}
+    .pointer{width:auto;bottom:30%}
+    .pointer span{font-size:25px;white-space:normal;width:76px}
+    .collage.free > :not(.solo) .pointer{display:none}
+}

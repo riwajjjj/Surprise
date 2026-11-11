@@ -1,0 +1,11 @@
+/* dialogs.css: pop-up windows: photo viewer */
+
+/* ---------- dialogs: photo lightbox, letters, bouquet ---------- */
+dialog{border:0;padding:0;background:transparent;width:min(640px,calc(100vw - 32px));max-width:none;color:var(--ink);overflow:visible}
+dialog::backdrop{background:rgba(30,20,15,.74)}
+dialog[open] > *{animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{transform:translateY(20px) rotate(-2deg);opacity:0}}
+.lb-inner{position:relative;background:var(--card);padding:14px 14px 0;transform:rotate(-1deg);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.lb-inner img{width:100%;max-height:68vh;object-fit:contain;background:#2b211c;filter:sepia(.12) saturate(1.1)}
+.lb-inner .date-stamp{bottom:70px;right:24px;font-size:20px}
+.lb-inner p{margin:0;padding:14px 6px 18px;font-family:var(--f-scrawl),cursive;font-size:38px;line-height:1}

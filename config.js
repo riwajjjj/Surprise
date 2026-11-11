@@ -179,4 +179,4 @@ window.CONFIG = {
     // a sealed envelope at the very end that only opens on a date. null = off.
     // To turn it on: sealedLetter: { opensOn: "07.10.2027", title: "our first year", body: "..." }
     sealedLetter: null
-};
+};

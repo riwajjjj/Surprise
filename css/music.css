@@ -1,0 +1,122 @@
+/* music.css: the mixtape player and the background-music switch */
+
+/* ---------- music: the mixtape player (a paper slip taped to the page) + the generated-music switch ---------- */
+.deck{position:fixed;z-index:150;left:50%;bottom:max(14px,env(safe-area-inset-bottom,0px));width:min(560px,calc(100vw - 28px));
+    transform:translateX(-50%) rotate(-.8deg);opacity:0;translate:0 26px;transition:opacity .6s ease,translate .7s cubic-bezier(.2,.8,.2,1)}
+.deck.in{opacity:1;translate:0 0}
+.deck::before{content:"";position:absolute;inset:12px 8px 4px;z-index:-1;pointer-events:none;
+    box-shadow:0 14px 22px -4px rgba(40,25,15,.32),0 2px 3px rgba(40,25,15,.12)}
+.deck-paper{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"mc info btns" "mc prog prog";
+    align-items:center;gap:4px 16px;padding:22px 20px 20px 18px;color:var(--ink);background-color:var(--card);
+    background-image:var(--grain,none),linear-gradient(180deg,rgba(255,255,255,.6),transparent 40%)}
+.deck .washi{z-index:3}
+.deck-tape1{--wash:var(--rose);width:66px;height:20px;left:-14px;top:-4px;transform:rotate(-24deg)}
+.deck-tape2{--wash:var(--sage);width:62px;height:20px;right:-12px;left:auto;top:-6px;transform:rotate(21deg)}
+
+/* the little see-through pink cassette; its reels fill and empty as the song plays */
+.mc{grid-area:mc;position:relative;width:98px;height:64px;border-radius:7px;display:grid;justify-items:center;align-content:start;
+    background:linear-gradient(155deg,rgba(255,255,255,.65),rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 60%,rgba(255,255,255,.25)),#e8c0c8;
+    box-shadow:inset 0 0 0 1.5px rgba(126,15,31,.28),inset 0 -10px 14px rgba(126,15,31,.10),0 3px 6px -2px rgba(80,20,30,.3);transform:rotate(-4deg)}
+.mc::before,.mc::after{content:"";position:absolute;top:5px;width:4px;height:4px;border-radius:50%;background:rgba(126,15,31,.35)}
+.mc::before{left:5px}
+.mc::after{right:5px}
+.mc-label{margin-top:6px;width:78%;height:13px;border-radius:2px;display:grid;place-items:center;background:var(--card);
+    background-image:repeating-linear-gradient(transparent 0 4px,rgba(138,28,46,.16) 4px 5px)}
+.mc-label span{font-family:var(--f-mono),monospace;font-size:6.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cherry)}
+.mc-win{position:relative;margin-top:5px;width:74%;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;padding:0 5px;
+    background:rgba(60,25,30,.55);box-shadow:inset 0 2px 4px rgba(0,0,0,.45)}
+.mc-tape{position:absolute;left:24%;right:24%;bottom:3px;height:2px;background:#5c4030;opacity:.7}
+.mc-foot{position:absolute;bottom:0;left:22%;right:22%;height:8px;background:rgba(126,15,31,.14);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+.dreel{position:relative;width:20px;height:20px;display:grid;place-items:center}
+.dreel::before{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:radial-gradient(circle,#6a4a37 0 58%,#4a3226 60%);transform:scale(var(--k,1));transition:transform .5s}
+.dreel.l{--k:calc((10 + 9 * (1 - var(--p,0))) / 19)}
+.dreel.r{--k:calc((10 + 9 * var(--p,0)) / 19)}
+.dreel i{position:relative;width:10px;height:10px;border-radius:50%;
+    background:conic-gradient(#fbf3ea 0 30deg,#d9c9bd 30deg 60deg,#fbf3ea 60deg 150deg,#d9c9bd 150deg 180deg,#fbf3ea 180deg 270deg,#d9c9bd 270deg 300deg,#fbf3ea 300deg);
+    -webkit-mask:radial-gradient(circle 2.2px,#0000 98%,#000);mask:radial-gradient(circle 2.2px,#0000 98%,#000)}
+.deck.playing .dreel i{animation:spin 2.4s linear infinite}
+
+.deck-info{grid-area:info;min-width:0;display:grid;gap:0}
+.deck-kick{font-family:var(--f-type),monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cherry)}
+.deck-kick .k-on,.deck.playing .deck-kick .k-off{display:none}
+.deck.playing .deck-kick .k-on{display:inline}
+.deck-title,.deck-artist{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deck-title{font-family:var(--f-hand),cursive;font-size:27px;line-height:1.1;color:#1e2a47}
+.deck-artist{font-family:var(--f-type),monospace;font-size:12px;color:var(--soft)}
+.deck-artist:empty{display:none}
+
+/* ink buttons + the wax-seal play button */
+.deck-btns{grid-area:btns;display:flex;align-items:center;gap:4px}
+.dk{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;color:#2f2620;transition:color .2s,transform .15s}
+.dk svg{width:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dk:hover{color:var(--cherry)}
+.dk:active{transform:scale(.9)}
+.dk.play{width:50px;height:50px;margin-inline:2px;color:#ffe3e6;border-radius:47% 53% 50% 50%/52% 48% 52% 48%;
+    background:radial-gradient(circle at 35% 30%,#b0384e,var(--cherry) 45%,var(--cherry-2));box-shadow:inset 0 0 0 4px rgba(0,0,0,.13),0 3px 6px rgba(0,0,0,.28)}
+.dk.play:hover{color:#fff;transform:rotate(-8deg)}
+.dk.play svg{width:22px;fill:currentColor;stroke-width:1.4}
+.dk.play .i-pause{stroke-width:3.2}
+.dk .i-pause,.deck.playing .dk.play .i-play{display:none}
+.deck.playing .dk.play .i-pause{display:block}
+
+/* pencil line with a heart to drag */
+.deck-prog{grid-area:prog;display:flex;align-items:center;gap:10px;font-family:var(--f-type),monospace;font-size:11px;color:var(--soft);font-variant-numeric:tabular-nums}
+.deck-seek{flex:1;min-width:0;height:18px;margin:0;background:transparent;cursor:pointer;-webkit-appearance:none;appearance:none}
+.deck-seek::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,var(--cherry) var(--pp,0%),transparent var(--pp,0%)),repeating-linear-gradient(90deg,#8a7d72 0 5px,transparent 5px 9px)}
+.deck-seek::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:15px;margin-top:-6.5px;border:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 92'%3E%3Cpath d='M50 88C22 67 4 51 4 29 4 14 15 4 28 4c9 0 17 5 22 13C55 9 63 4 72 4c13 0 24 10 24 25 0 22-18 38-46 59z' fill='%238a1c2e' stroke='%23fbf8f2' stroke-width='9'/%3E%3C/svg%3E") center/contain no-repeat}
+.deck-seek::-moz-range-track{height:2px;background:repeating-linear-gradient(90deg,#8a7d72 0 5px,transparent 5px 9px)}
+.deck-seek::-moz-range-progress{height:2px;background:var(--cherry)}
+.deck-seek::-moz-range-thumb{width:16px;height:15px;border:0;border-radius:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 92'%3E%3Cpath d='M50 88C22 67 4 51 4 29 4 14 15 4 28 4c9 0 17 5 22 13C55 9 63 4 72 4c13 0 24 10 24 25 0 22-18 38-46 59z' fill='%238a1c2e' stroke='%23fbf8f2' stroke-width='9'/%3E%3C/svg%3E") center/contain no-repeat}
+.deck-seek:focus-visible{outline:2px dashed var(--cherry);outline-offset:3px}
+
+.deck-min{position:absolute;right:10px;top:8px;width:24px;height:24px;border-radius:50%;color:#9a8d83;font-family:var(--f-type),monospace;font-size:16px;line-height:1}
+.deck-min:hover{color:var(--cherry)}
+/* smaller: just the cassette and the seal, taped in the corner */
+.deck.min{left:auto;right:max(18px,env(safe-area-inset-right,0px));width:auto;transform:rotate(-3deg)}
+.deck.min .deck-paper{grid-template-columns:auto auto;grid-template-areas:"mc btns";gap:0 12px;padding:20px 34px 18px 16px}
+.deck.min .deck-info,.deck.min .deck-prog,.deck.min .dk.prev,.deck.min .dk.next,.deck.min .deck-tape2{display:none}
+/* keep the end of the page clear of the player */
+html.has-deck body{padding-bottom:140px}
+html.has-deck.deck-small body{padding-bottom:110px}
+
+/* generated background music switch (only when there are no songs): label-maker tape in the corner */
+.music-btn{position:fixed;z-index:150;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));
+    display:inline-flex;align-items:center;gap:8px;padding:8px 14px 7px 12px;background:#1d1a19;color:#f2eee8;
+    font-family:var(--f-mono),monospace;font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    transform:rotate(-2deg);clip-path:polygon(0 0,100% 5%,99% 100%,1% 95%);
+    box-shadow:0 2px 0 rgba(0,0,0,.25),0 8px 14px -8px rgba(0,0,0,.5);transition:transform .3s,opacity .3s}
+.music-btn:hover{transform:rotate(0deg) scale(1.04)}
+.music-btn .mb-note{font-size:16px;line-height:1;color:var(--rose);display:inline-block}
+.music-btn[data-state="on"] .mb-note{animation:bob 2.6s ease-in-out infinite}
+.music-btn[data-state="off"]{opacity:.72}
+.music-btn[data-state="off"] .mb-note{color:#8a817a;text-decoration:line-through}
+.music-btn[data-state="paused"] .mb-note{color:var(--butter)}
+
+@media (max-width:560px){
+    .deck{width:calc(100vw - 20px);bottom:max(10px,env(safe-area-inset-bottom,0px));transform:translateX(-50%) rotate(-.6deg)}
+    .deck-paper{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"mc info btns";gap:0 12px;padding:18px 30px 22px 12px}
+    .mc{width:66px;height:44px;border-radius:5px}
+    .mc-label{margin-top:4px;height:9px}
+    .mc-label span{display:none}
+    .mc-win{margin-top:4px;height:17px;padding:0 3px}
+    .mc-foot{height:5px}
+    .dreel{width:14px;height:14px}
+    .dreel::before{width:13px;height:13px}
+    .dreel.l{--k:calc((7 + 6 * (1 - var(--p,0))) / 13)}
+    .dreel.r{--k:calc((7 + 6 * var(--p,0)) / 13)}
+    .dreel i{width:7px;height:7px;-webkit-mask:radial-gradient(circle 1.6px,#0000 98%,#000);mask:radial-gradient(circle 1.6px,#0000 98%,#000)}
+    .deck-kick{font-size:9px}
+    .deck-title{font-size:22px}
+    .deck-artist{font-size:11px}
+    .dk.prev{display:none}
+    .dk.play{width:44px;height:44px}
+    .deck-prog{position:absolute;left:14px;right:14px;bottom:6px}
+    .deck-prog span{display:none}
+    .deck-seek{height:14px}
+    .deck-min{right:6px;top:6px}
+    .deck.min .deck-paper{padding:16px 30px 16px 12px}
+    html.has-deck body{padding-bottom:110px}
+    html.has-deck.deck-small body{padding-bottom:96px}
+    .music-btn{padding:9px 12px 8px;gap:0}   /* shrinks to just the note */
+    .music-btn .mb-txt{display:none}
+}

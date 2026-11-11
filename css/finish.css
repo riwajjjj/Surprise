@@ -1,0 +1,15 @@
+/* finish.css: last on purpose: reduced motion and the heart cursor must win over everything above */
+
+/* ---------- reduced motion: everything simply appears ---------- */
+@media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .js .rv.pre{opacity:1;transform:none}
+    .stage .letter-paper{transform:none}
+    .env-back,.env-front,.env-flap{display:none}
+}
+
+
+/* ---------- a heart cursor on things you can tap (mouse only) ---------- */
+.heart-cursor button,.heart-cursor .sticky,.heart-cursor .notebook li,.heart-cursor .ph,.heart-cursor .sticker{cursor:var(--heart-cursor)}
+.heart-cursor .m-shot .shot-ph,.heart-cursor .scan .scan-photo{cursor:zoom-in}

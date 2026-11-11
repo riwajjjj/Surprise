@@ -1,0 +1,53 @@
+/* letters.css: open-when envelopes and the letter-opening animation */
+
+/* ---------- open-when envelopes ---------- */
+.envelopes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:30px 26px}
+.env{position:relative;aspect-ratio:3/2;background:var(--kraft);text-align:left;overflow:visible;
+    box-shadow:0 18px 26px -18px rgba(40,25,15,.65);transform:rotate(var(--r,0deg));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.env:nth-child(3n+2){background:#dfc6a5}
+.env:nth-child(3n){background:var(--rose)}
+.kraft .env{box-shadow:0 18px 26px -16px rgba(60,35,15,.7)}
+.kraft .env:nth-child(3n+1){background:#e8d3b2}
+.env:hover{transform:rotate(0deg) translateY(-6px)}
+.env::before{content:"";position:absolute;inset:0 0 38% 0;background:rgba(0,0,0,.08);clip-path:polygon(0 0,100% 0,50% 100%)}
+.env::after{content:"";position:absolute;inset:auto 0 0 0;height:62%;background:rgba(255,255,255,.08);clip-path:polygon(0 100%,50% 18%,100% 100%)}
+.env .wax{top:46%}
+.env.read .wax{transform:rotate(-24deg) translate(6px,8px);opacity:.75;clip-path:polygon(0 0,62% 0,40% 46%,70% 100%,0 100%)}
+.env .to{position:absolute;left:16px;bottom:10px;right:70px;z-index:2;font-family:var(--f-hand),cursive;font-size:27px;line-height:1;color:#2f2620}
+.env .to small{display:block;font-family:var(--f-type),monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:4px}
+@media (max-width:560px){ /* two per row on phones */
+    .envelopes{grid-template-columns:1fr 1fr;gap:18px 12px}
+    .env .to{font-size:20px;left:10px;right:10px}
+    .env .to small{font-size:9px}
+    .env .wax{top:36%}
+}
+
+
+/* ---------- a letter opening: the flap lifts and the letter slides out ---------- */
+.letter-paper{position:relative;background:var(--card);color:#2f2620;padding:52px clamp(24px,5vw,52px) 48px;
+    background-image:repeating-linear-gradient(transparent 0 31px,rgba(80,120,160,.24) 31px 32px,transparent 32px 38px);   /* ruled; main.js lines the rules up under the handwriting */
+    background-position:0 var(--rule,62px);background-attachment:local;box-shadow:0 22px 34px -22px rgba(40,25,15,.6)}
+.letter-paper .to{font-family:var(--f-type),monospace;font-size:15px;margin:0 0 16px;color:var(--soft)}
+.letter-paper .body{font-family:var(--f-hand),cursive;font-size:clamp(25px,3.2vw,29px);line-height:38px;white-space:pre-line;margin:0}
+.letter-paper .sig{font-family:var(--f-sig),cursive;font-size:clamp(28px,4vw,34px);line-height:1.4;text-align:right;margin:18px 0 0;color:var(--cherry)}
+
+#letterBox{width:fit-content;margin:auto}
+#letterBox .letter-paper{max-height:80vh;overflow:auto}
+.stage{--W:min(520px,calc(100vw - 32px));--H:min(80vh,660px);--E:calc(var(--W) * .66);
+    position:relative;width:var(--W);height:var(--H);overflow:hidden;overflow:clip;perspective:1400px}
+.stage .letter-paper{position:absolute;inset:0 4%;overflow:auto;z-index:2;
+    transform:translateY(calc(var(--H) - var(--E) * .9)) scale(.9);transition:transform 1s cubic-bezier(.3,.7,.2,1)}
+.stage .env-back,.env-front,.env-flap{position:absolute;left:0;right:0;bottom:0;height:var(--E);background:var(--ec,var(--kraft));transition:transform .9s cubic-bezier(.5,0,.3,1),opacity .7s}
+.stage .env-back{z-index:1;filter:brightness(.82)}
+.env-front{z-index:3;clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);box-shadow:inset 0 -30px 40px -30px rgba(0,0,0,.25)}
+.env-front::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 48%,rgba(0,0,0,.06) 50%,transparent 52%),linear-gradient(200deg,transparent 48%,rgba(0,0,0,.06) 50%,transparent 52%)}
+.env-flap{z-index:4;bottom:auto;top:calc(var(--H) - var(--E));height:calc(var(--E) * .6);clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top center;filter:brightness(.93);transition:transform .7s cubic-bezier(.4,0,.2,1),z-index 0s .35s,opacity .7s}
+.env-flap .wax{top:auto;bottom:4%;left:50%}
+.stage.s1 .env-flap{transform:rotateX(180deg);z-index:0}
+.stage.s2 .letter-paper{transform:translateY(calc(var(--H) - var(--E) * 1.75)) scale(.9)}
+.stage.s3 .letter-paper{transform:none}
+.stage.s3 .env-back,.stage.s3 .env-front{transform:translateY(105%);opacity:0}
+.stage.s3 .env-flap{opacity:0}
+.lb-close,.letter-close{position:absolute;top:-34px;right:0;color:#fff;font-size:15px}
+.letter-close{top:14px;right:18px;color:var(--soft);z-index:2}

@@ -1,0 +1,25 @@
+/* night.css: night mode after 11pm */
+
+/* ---------- night mode: after 11pm the page dims, stars come out, a goodnight note pops up ---------- */
+#night{position:fixed;inset:0;z-index:140;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 2.5s ease,visibility 2.5s;
+    background:linear-gradient(180deg,rgba(16,20,52,.36),rgba(16,20,52,.2) 55%,rgba(16,20,52,.3))}
+html.night #night{opacity:1;visibility:visible;will-change:opacity}
+#night i{position:absolute;width:var(--ts);height:var(--ts);border-radius:50%;background:#fff6dc;box-shadow:0 0 6px 1px rgba(255,240,200,.75);
+    animation:twinkle var(--tw) ease-in-out var(--td) infinite alternate}
+html:not(.night) #night i{animation:none}
+@keyframes twinkle{from{opacity:.15;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+html.night #gardenSvg .g-night{opacity:1}
+html.night #gardenSvg .g-day{opacity:0}
+html.night #gardenSvg .sky0{stop-color:#1f2652}
+html.night #gardenSvg .sky1{stop-color:#3a3f6e}
+html.night #gardenSvg .sky2{stop-color:#5b5576}
+
+.night-note{position:fixed;z-index:160;left:50%;top:max(18px,env(safe-area-inset-top,0px));width:min(430px,calc(100vw - 28px));
+    display:flex;align-items:center;gap:10px;padding:14px 12px 14px 18px;background:#1f2444;color:#f3ece1;
+    opacity:0;transform:translate(-50%,-16px) rotate(-1deg);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 18px 28px -14px rgba(0,0,0,.6);clip-path:polygon(0 0,100% 3%,99% 100%,1% 97%)}
+.night-note.in{opacity:1;transform:translate(-50%,0) rotate(-1deg)}
+.night-note p{margin:0;flex:1;font-size:25px;line-height:1.15}
+.night-note p::before{content:"☾ ";color:var(--butter)}
+.night-note button{flex:none;width:32px;height:32px;color:#c9c2b8;font-size:22px;line-height:1}
+.night-note button:hover{color:#fff}

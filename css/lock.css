@@ -1,0 +1,97 @@
+/* lock.css: the lock screen: opened envelope, combination lock, falling petals, cracking seal */
+
+/* ---------- lock screen: an opened envelope with a combination lock ---------- */
+#lock{position:fixed;inset:0;z-index:300;display:grid;place-items:center;overflow:hidden;background:var(--paper);background-image:var(--grain,none);
+    padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+    transition:opacity .55s ease,visibility .55s}
+#lock.gone{opacity:0;visibility:hidden}
+
+/* falling tulip petals */
+#lock .petals{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#lock .petals i{position:absolute;top:-8%;left:var(--px);width:var(--pw);height:calc(var(--pw) * 1.4);border-radius:0 85% 0 85%;
+    background:linear-gradient(135deg,var(--pc2),var(--pc));opacity:.8;box-shadow:inset -1px -1px 2px rgba(0,0,0,.12);
+    animation:petalFall var(--pd) linear var(--pdl) infinite}
+#lock.gone .petals i{animation-play-state:paused}
+@keyframes petalFall{
+    0%{transform:translate3d(0,-10vh,0) rotate(0deg)}
+    25%{transform:translate3d(var(--sx),22vh,0) rotate(80deg)}
+    50%{transform:translate3d(calc(var(--sx) * -.6),52vh,0) rotate(170deg)}
+    75%{transform:translate3d(var(--sx),82vh,0) rotate(260deg)}
+    100%{transform:translate3d(0,118vh,0) rotate(350deg)}}
+
+/* the envelope: back, folded-open flap, the letter standing up out of the pocket, wax seal on the front */
+.lock-env{--ew:min(400px,calc(100vw - 32px));--ph:calc(var(--ew) * .5);
+    position:relative;display:grid;width:var(--ew);padding:0;perspective:900px;
+    transform:rotate(-1deg);transition:transform .55s ease;filter:drop-shadow(0 26px 30px rgba(40,25,15,.38))}
+#lock.gone .lock-env{transform:rotate(-1deg) translateY(-16px) scale(.97)}
+.lock-env .env-back{position:absolute;left:0;right:0;bottom:0;z-index:1;height:calc(var(--ph) + var(--ew) * .16);border-radius:3px;
+    background:var(--kraft-2);background-image:var(--grain,none),linear-gradient(180deg,rgba(0,0,0,.12),transparent 40%);filter:brightness(.82)}
+.lock-flap{position:absolute;left:0;right:0;bottom:calc(var(--ph) + var(--ew) * .16 - 1px);height:calc(var(--ew) * .3);
+    background:#b48c5f;background-image:var(--grain,none),linear-gradient(0deg,rgba(0,0,0,.1),transparent);clip-path:polygon(0 100%,50% 0,100% 100%)}
+.lock-paper{position:relative;z-index:1;display:grid;gap:10px;margin:0 7%;padding:34px 22px calc(var(--ph) * .66 + 28px);
+    background:var(--card);text-align:center;transition:transform .9s cubic-bezier(.3,.7,.2,1) .6s}
+#lock.opening .lock-paper{transform:translateY(-34px)}
+.lock-paper p{margin:0}
+.lock-paper .conf{white-space:nowrap;font-size:clamp(11px,3.4vw,14px);letter-spacing:.06em}
+.lock-paper .big{font-size:clamp(38px,11vw,46px);line-height:1;margin:0;color:var(--cherry)}
+#lockMsg{min-height:28px;margin-top:2px;font-size:24px;color:var(--cherry)}
+.lock-row{display:grid;justify-items:center;gap:18px;margin-top:6px}
+.lock-row input{width:min(240px,100%);border:0;border-bottom:1.5px dashed var(--ink);background:transparent;font-family:var(--f-type),monospace;font-size:24px;letter-spacing:.35em;text-align:center;padding:6px 0;color:var(--ink)}
+.lock-row input:focus{outline:none;border-bottom-style:solid}
+.env-pocket{position:absolute;z-index:2;left:0;right:0;bottom:0;height:var(--ph);border-radius:0 0 3px 3px;
+    background:var(--kraft);background-image:var(--grain,none),linear-gradient(155deg,rgba(255,255,255,.12),transparent 45%),linear-gradient(205deg,rgba(0,0,0,.08),transparent 50%);
+    clip-path:polygon(0 0,50% 44%,100% 0,100% 100%,0 100%)}
+.env-pocket::before{ /* the fold lines where the side flaps meet the bottom flap */
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top right,transparent calc(50% - 1px),rgba(90,60,30,.22) 50%,transparent calc(50% + 1px)) left/50% 100% no-repeat,
+               linear-gradient(to top left,transparent calc(50% - 1px),rgba(90,60,30,.22) 50%,transparent calc(50% + 1px)) right/50% 100% no-repeat}
+
+/* postmark + tulip stamp on the front */
+.postmark{position:absolute;right:12px;bottom:12px;z-index:3;width:160px;height:66px;pointer-events:none}
+.lock-stamp{right:2px;top:-6px;transform:rotate(4deg)}
+.lock-stamp i{background:var(--rose);color:var(--cherry)}
+.lock-stamp .tulip-g{width:70%}
+.postmark .pm{position:absolute;right:40px;top:0;width:118px;color:var(--cherry-2);opacity:.72;transform:rotate(-8deg);font-family:var(--f-mono),monospace}
+
+/* the wax seal you press to open; it cracks in two */
+.seal-btn{position:absolute;z-index:3;left:50%;bottom:calc(var(--ph) * .56 - 35px);margin-left:-35px;width:70px;height:70px;flex:none;
+    border-radius:47% 53% 50% 50%/52% 48% 52% 48%;background:radial-gradient(circle at 35% 30%,#b0384e,var(--cherry) 45%,var(--cherry-2));color:#ffd9dc;
+    font-family:var(--f-hand),cursive;font-size:20px;box-shadow:inset 0 0 0 4px rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.25);transition:transform .2s}
+.seal-btn:hover{transform:rotate(-8deg) scale(1.05)}
+.seal-btn.cracked{background:none;box-shadow:none}
+.seal-btn .half{position:absolute;inset:0;border-radius:inherit;
+    background:radial-gradient(circle at 35% 30%,#b0384e,var(--cherry) 45%,var(--cherry-2));box-shadow:inset 0 0 0 4px rgba(0,0,0,.12);
+    animation:crackL .95s cubic-bezier(.3,.6,.4,1) forwards}
+.seal-btn .half.l{clip-path:polygon(0 0,52% 0,44% 28%,57% 50%,45% 73%,54% 100%,0 100%)}
+.seal-btn .half.r{clip-path:polygon(52% 0,100% 0,100% 100%,54% 100%,45% 73%,57% 50%,44% 28%);animation-name:crackR}
+@keyframes crackL{20%{transform:translate(-3px,0) rotate(-6deg)}100%{transform:translate(-26px,30px) rotate(-38deg);opacity:0}}
+@keyframes crackR{20%{transform:translate(3px,0) rotate(6deg)}100%{transform:translate(26px,34px) rotate(40deg);opacity:0}}
+
+/* the combination lock: one rolling wheel per digit */
+.combo{position:relative;display:inline-flex;gap:7px;margin-top:22px;padding:10px 12px 8px;border-radius:12px;
+    background:linear-gradient(180deg,#e2c27e,#c39549 52%,#a3793a);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -3px 0 rgba(0,0,0,.18),0 10px 16px -10px rgba(40,25,15,.7)}
+.combo::before{ /* shackle */
+    content:"";position:absolute;left:50%;top:-31px;width:58px;height:34px;margin-left:-29px;
+    border:7px solid #b7b0a5;border-bottom:0;border-radius:30px 30px 0 0;
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 -1px 0 rgba(0,0,0,.15);transition:transform .55s cubic-bezier(.3,1.7,.5,1)}
+.combo::after{content:"";position:absolute;left:50%;bottom:-6px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#7d5a24;box-shadow:inset 0 1px 1px rgba(0,0,0,.4)}
+#lock.opening .combo::before{transform:translateY(-12px)}
+.dial{display:grid;justify-items:center;gap:1px;touch-action:none;user-select:none;-webkit-user-select:none;outline:none}
+.dial-win{position:relative;display:block;width:1.05em;height:1.3em;overflow:hidden;border-radius:4px;cursor:ns-resize;
+    font-family:var(--f-mono),monospace;font-weight:700;font-size:30px;line-height:1.3em;text-align:center;color:#2b221e;
+    background:linear-gradient(#d6cab6,#fbf6ec 30%,#fbf6ec 70%,#d6cab6);box-shadow:inset 0 0 0 1px rgba(0,0,0,.28),inset 0 2px 3px rgba(0,0,0,.18)}
+.dial-win::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(0,0,0,.28),transparent 32%,transparent 68%,rgba(0,0,0,.28))}
+.dial-strip{display:block;transform:translateY(calc(var(--i,10) * -1.3em));transition:transform .28s cubic-bezier(.3,.7,.3,1)}
+.dial-strip span{display:block;height:1.3em}
+.dial-btn{width:30px;height:15px;display:grid;place-items:center;color:#5e4316}
+.dial-btn svg{width:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dial-btn:hover{color:var(--cherry)}
+.dial:focus-visible .dial-win{outline:2px dashed var(--cherry);outline-offset:3px}
+#lock.opening .dial-win{box-shadow:inset 0 0 0 1px rgba(0,0,0,.28),0 0 0 2px #6fae86,0 0 12px rgba(111,174,134,.8)}
+
+@media (max-height:640px){
+    .lock-paper{padding-top:24px}
+    .lock-env{--ph:calc(var(--ew) * .42)}
+}
+@media (max-width:420px){.postmark{transform:scale(.84);transform-origin:top right}}

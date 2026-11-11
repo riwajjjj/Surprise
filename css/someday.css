@@ -1,0 +1,31 @@
+/* someday.css: the someday notebook */
+
+/* ---------- someday notebook ---------- */
+.notebook-wrap{position:relative;max-width:720px;margin:0 auto}
+.notebook-wrap > .washi{z-index:4}
+.notebook{position:relative;max-width:720px;margin:0 auto;background:var(--card);padding:56px clamp(24px,5vw,56px) 56px clamp(60px,9vw,86px);transform:rotate(-.8deg);
+    background-image:linear-gradient(90deg,transparent 0 calc(clamp(60px,9vw,86px) - 16px),rgba(138,28,46,.45) 0 calc(clamp(60px,9vw,86px) - 14px),transparent 0),
+    repeating-linear-gradient(transparent 0 37px,rgba(80,120,160,.25) 37px 38px);
+    background-position:0 0,0 22px;box-shadow:0 24px 36px -26px rgba(40,25,15,.6)}
+.notebook::before{content:"";position:absolute;left:18px;top:40px;bottom:40px;width:14px;   /* spiral holes */
+    background-image:radial-gradient(circle 6px,var(--paper) 96%,transparent 100%);background-size:14px 38px}
+.notebook h2{font-size:clamp(44px,6vw,62px);font-weight:600;margin:0 0 14px;line-height:1;color:var(--cherry)}
+.notebook p{margin:0 0 4px;color:var(--soft)}
+.notebook ul{list-style:none;margin:0;padding:0}
+.notebook li{display:flex;gap:14px;align-items:center;font-family:var(--f-hand),cursive;font-size:clamp(25px,3.4vw,30px);line-height:38px;cursor:pointer;user-select:none}
+.notebook li .box{width:20px;height:20px;flex:none;border:2px solid #3a2f2a;border-radius:3px 5px 2px 4px;transform:rotate(-4deg);position:relative}
+.notebook li.done .box::after{content:"";position:absolute;left:2px;top:-8px;width:10px;height:20px;border:solid var(--cherry);border-width:0 3px 3px 0;transform:rotate(40deg)}
+.notebook li.done .t{text-decoration:line-through;text-decoration-color:var(--cherry);text-decoration-thickness:2px}
+.nb-star{position:absolute;right:9%;top:46px;width:40px;transform:rotate(12deg)}
+.nb-star path:first-child,.nb-star path:last-child{stroke:var(--emerald)}
+.nb-foot{margin:14px 0 0;font-size:24px;color:var(--soft);transform:rotate(-1.5deg)}
+/* the polaroid paper-clipped to it */
+.clip-pol{position:absolute;right:-150px;bottom:10px;width:170px;z-index:5}
+.clip-pol .polaroid .cap{font-size:25px;min-height:40px}
+.paperclip{position:absolute;left:46%;top:-22px;z-index:6;width:16px;height:46px;border:2.5px solid #9aa0a6;border-radius:9px;transform:rotate(8deg)}
+.paperclip::after{content:"";position:absolute;left:2px;right:2px;top:6px;bottom:-2px;border:2.5px solid #9aa0a6;border-top:0;border-radius:0 0 6px 6px}
+@media (max-width:1060px){
+    .notebook-wrap{display:flex;flex-direction:column}
+    .clip-pol{position:relative;right:auto;bottom:auto;width:150px;margin:-14px 8% 0 auto}
+    .notebook-wrap .clip-pol{order:2;align-self:flex-end}
+}

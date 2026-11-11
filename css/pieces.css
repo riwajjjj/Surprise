@@ -1,0 +1,124 @@
+/* pieces.css: shared pieces: torn edges, doodles, washi tape, film photos, polaroids, cassette, wax seal, popping hearts */
+
+/* ---------- shared pieces ---------- */
+/* torn top + bottom edges */
+.torn{
+    -webkit-mask:linear-gradient(#000 0 0) center/100% calc(100% - 14px) no-repeat,var(--torn) top/140px 12px repeat-x,var(--torn-b) bottom/150px 12px repeat-x;
+    mask:linear-gradient(#000 0 0) center/100% calc(100% - 14px) no-repeat,var(--torn) top/140px 12px repeat-x,var(--torn-b) bottom/150px 12px repeat-x;
+}
+
+/* hand-drawn doodles (main.js draws them in as they scroll into view) */
+.doodle{fill:none;stroke:var(--cherry);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.d-heart{width:72px;position:absolute;right:4%;top:2%;transform:rotate(12deg)}
+.d-arrow{width:62px;vertical-align:middle;transform:translateY(-4px) rotate(8deg)}
+.d-tulip{width:30px;vertical-align:-6px;margin-left:6px;overflow:visible}
+.d-tulip path:first-child,.d-tulip path:last-child{stroke:var(--emerald)}
+.d-circle{position:absolute;left:50%;top:50%;width:calc(100% + 30px);transform:translate(-50%,-50%) rotate(-4deg);overflow:visible;stroke-width:2.2}
+.u-line{position:absolute;left:-4px;bottom:-14px;width:clamp(120px,62%,300px);overflow:visible;stroke-width:3}
+.note-heart{width:26px;vertical-align:-4px;transform:rotate(-8deg);overflow:visible}
+.tulip-g{display:block;width:58%;fill:currentColor}
+.tulip-g .tg-stem{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+
+/* label-maker tape section titles */
+.sec-title{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-bottom:clamp(28px,4vw,44px)}
+.label-tape{
+    display:inline-block;background:#1d1a19;color:#f2eee8;font-family:var(--f-mono),monospace;font-weight:700;
+    font-size:clamp(17px,2.4vw,22px);letter-spacing:.32em;text-transform:uppercase;padding:9px 16px 8px 20px;
+    transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.25),0 8px 14px -8px rgba(0,0,0,.5);
+    text-shadow:0 1px 0 rgba(0,0,0,.6),0 -1px 0 rgba(255,255,255,.25);
+    clip-path:polygon(0 0,100% 4%,99% 100%,1% 96%);
+}
+.sec-title .note{font-size:26px;color:var(--soft);transform:rotate(-2deg)}
+
+/* washi tape */
+.washi{
+    position:absolute;width:96px;height:26px;z-index:3;opacity:.86;
+    background:var(--wash,var(--rose));
+    background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px);
+    clip-path:polygon(3% 0,97% 4%,100% 22%,97% 42%,100% 62%,96% 82%,98% 100%,2% 96%,0 78%,3% 58%,0 38%,4% 18%);
+    box-shadow:0 1px 2px rgba(0,0,0,.08);
+}
+.washi.dots{background-image:radial-gradient(rgba(255,255,255,.6) 2px,transparent 2.5px);background-size:10px 10px}
+.washi.grid{background-image:linear-gradient(rgba(138,28,46,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(138,28,46,.25) 1px,transparent 1px);background-size:8px 8px}
+
+/* film photos: vignette, light leak, orange date stamp; they "develop" when they scroll into view */
+.ph{position:relative;display:block;overflow:hidden;background:#3a2a22;width:100%;isolation:isolate}
+.ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.16) saturate(1.12) contrast(1.06) brightness(1.02)}
+.ph::after{
+    content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+    background:radial-gradient(ellipse at center,transparent 55%,rgba(40,20,10,.35) 100%),linear-gradient(110deg,rgba(255,140,60,.18),transparent 30%);
+}
+.ph::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;
+    background:radial-gradient(ellipse at 40% 35%,#8a978c,#5f6c64 70%,#4e5953);transition:opacity 3.4s cubic-bezier(.55,0,.6,1)}
+.ph.undev::before{opacity:1;transition:none}
+.ph.undev img{filter:sepia(.4) saturate(0) contrast(.55) brightness(1.25) blur(1.5px)}
+.ph .date-stamp{transition:opacity 1.2s ease 2.8s}
+.ph.undev .date-stamp{opacity:0;transition:none}
+.date-stamp{
+    position:absolute;right:9px;bottom:7px;z-index:2;font-family:var(--f-stamp),monospace;font-size:15px;letter-spacing:.06em;
+    color:var(--stamp);text-shadow:0 0 4px rgba(255,120,30,.85),0 0 1px #ffb46b;opacity:.92;
+}
+
+.polaroid{
+    position:relative;width:100%;background:var(--card);padding:12px 12px 0;text-align:left;
+    box-shadow:0 1px 2px rgba(40,25,15,.15),0 18px 30px -18px rgba(40,25,15,.55);
+    transform:rotate(var(--r,0deg));transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.polaroid .ph{aspect-ratio:var(--ar,1/1)}
+.polaroid .cap{display:block;font-family:var(--f-scrawl),cursive;font-size:30px;line-height:1;padding:10px 4px 12px;color:#3a2f2a;min-height:50px}
+.polaroid:hover{transform:rotate(0deg) translateY(-6px) scale(1.015);box-shadow:0 2px 3px rgba(40,25,15,.15),0 26px 38px -18px rgba(40,25,15,.55);z-index:5}
+
+.print{ /* borderless print with a white edge */
+    position:relative;width:100%;background:#fff;padding:6px;box-shadow:0 14px 26px -16px rgba(40,25,15,.6);
+    transform:rotate(var(--r,0deg));transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.print .ph{aspect-ratio:var(--ar,3/2)}
+.print:hover{transform:rotate(0deg) translateY(-6px);z-index:5}
+
+/* cassette tape (the hero's "songs for you") */
+.cassette{display:grid;gap:8px;width:210px;padding:12px 12px 14px;background:#2f2a2b;border-radius:10px;
+    box-shadow:inset 0 0 0 2px #454042,0 14px 24px -12px rgba(0,0,0,.55);transition:transform .3s}
+.cassette:hover{transform:rotate(-3deg) scale(1.03)!important}
+.cassette.big{width:260px}
+.c-label{display:flex;justify-content:space-between;align-items:baseline;background:var(--rose);padding:4px 10px;border-radius:3px;color:#3a2a2a;
+    background-image:repeating-linear-gradient(transparent 0 9px,rgba(138,28,46,.18) 9px 10px)}
+.c-label .hand{font-size:22px;line-height:1.1}
+.c-window{display:flex;justify-content:space-around;align-items:center;height:46px;background:#1a1718;border-radius:24px;margin:0 18px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6)}
+.reel{width:34px;height:34px;border-radius:50%;background:conic-gradient(#efe7dc 0 20deg,#bbb 20deg 60deg,#efe7dc 60deg 140deg,#bbb 140deg 180deg,#efe7dc 180deg 260deg,#bbb 260deg 300deg,#efe7dc 300deg);
+    -webkit-mask:radial-gradient(circle 6px,#0000 98%,#000);mask:radial-gradient(circle 6px,#0000 98%,#000)}
+.cassette.playing .reel{animation:spin 2.2s linear infinite}
+
+/* wax seal + postage stamp (envelopes, lock screen) */
+.wax{position:absolute;left:50%;top:62%;width:46px;height:46px;margin:-23px;z-index:2;border-radius:46% 54% 51% 49%/53% 47% 53% 47%;
+    background:radial-gradient(circle at 35% 30%,#b0384e,var(--cherry) 45%,var(--cherry-2));box-shadow:inset 0 0 0 4px rgba(0,0,0,.14),0 3px 5px rgba(0,0,0,.3);
+    display:grid;place-items:center;color:#ffd0d5;font-size:18px;line-height:0;transition:transform .4s}
+.postage{position:absolute;right:12px;top:12px;z-index:2;width:44px;height:54px;background:var(--card);display:grid;place-items:center;transform:rotate(4deg);
+    -webkit-mask:radial-gradient(circle 3px at 3px 3px,#0000 98%,#000) -3px -3px/7px 7px;mask:radial-gradient(circle 3px at 3px 3px,#0000 98%,#000) -3px -3px/7px 7px}
+.postage i{width:32px;height:40px;background:var(--sage);display:grid;place-items:center;font-style:normal;color:var(--cherry);font-size:18px}
+@media (max-width:560px){
+    .wax{width:34px;height:34px;margin:-17px;font-size:13px}
+    .postage{width:30px;height:38px;right:8px;top:8px}
+    .postage i{width:22px;height:28px;font-size:13px}
+}
+
+/* hearts & petals that pop out of things */
+.burst-box{position:fixed;width:0;height:0;z-index:5;pointer-events:none}
+.pop-heart{position:absolute;left:50%;top:45%;z-index:3;pointer-events:none;line-height:1;color:var(--hc,#b0384e);
+    animation:heartPop 1.5s cubic-bezier(.2,.7,.3,1) var(--hd,0s) both}
+.pop-heart.petal{width:10px;height:14px;border-radius:0 85% 0 85%;background:var(--hc)}
+
+/* gentle reveal for things below the fold; content is visible at rest */
+.rv{transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rv.pre{opacity:0;transform:translateY(26px) rotate(var(--r,0deg))}
+.shake{animation:shake .4s}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{25%{transform:translateX(-6px) rotate(-1deg)}75%{transform:translateX(6px) rotate(-1deg)}}
+@keyframes heartPop{
+    0%{transform:translate(-50%,-50%) scale(.2);opacity:0}
+    15%{opacity:1}
+    100%{transform:translate(calc(-50% + var(--hx)),calc(-50% + var(--hy))) rotate(var(--hr)) scale(1);opacity:0}}
+@keyframes fadein{from{opacity:0}}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes pulse{50%{transform:scale(1.13)}}
+@keyframes bob{50%{transform:translateY(-3px) rotate(-8deg)}}

@@ -1,0 +1,15 @@
+/* garden.css: our little garden */
+
+/* ---------- our little garden: a tulip for every month ---------- */
+.garden{position:relative;width:min(360px,92%);margin:0 auto;padding:14px 14px 18px;background:var(--card);text-align:center;
+    transform:rotate(-1.2deg);box-shadow:0 1px 2px rgba(40,25,15,.15),0 22px 30px -20px rgba(40,25,15,.55)}
+.garden svg{display:block;width:100%;height:auto;background:#f3ead8}
+.garden-cap{margin:14px 0 2px;font-size:29px;line-height:1.1;color:var(--cherry)}
+.garden-sub{margin:0;color:var(--soft)}
+.garden .sway{transform-box:view-box;animation:sway 5.5s ease-in-out var(--sd,0s) infinite alternate;animation-play-state:paused}
+.garden.live .sway{animation-play-state:running}
+@keyframes sway{from{transform:rotate(-1.8deg)}to{transform:rotate(1.8deg)}}
+/* the window: sun & clouds by day, moon & stars in night mode */
+#gardenSvg .g-day{transition:opacity 2s}
+#gardenSvg .g-night{opacity:0;transition:opacity 2s}
+#gardenSvg stop{transition:stop-color 2s}

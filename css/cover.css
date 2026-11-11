@@ -1,0 +1,86 @@
+/* cover.css: the book cover she taps to open */
+
+/* ---------- book cover (she taps to open it) ---------- */
+#cover{position:fixed;inset:0;z-index:290;display:grid;place-items:center;align-content:center;gap:40px;overflow:hidden;cursor:pointer;
+    background:#2a201b;background-image:var(--grain,none),radial-gradient(ellipse at 50% 42%,rgba(255,210,160,.2),transparent 62%);
+    padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+    transition:opacity 1s ease,visibility 1s}
+#cover.gone{opacity:0;visibility:hidden;pointer-events:none}
+#cover:focus-visible{outline:none}
+#cover:focus-visible .cover-hint{text-decoration:underline dashed;text-underline-offset:6px}
+.cover-wrap{position:relative;width:min(340px,76vw);aspect-ratio:3/4;perspective:1800px;
+    opacity:0;transform:translateY(26px) scale(.95);transition:opacity .8s ease,transform 1.3s cubic-bezier(.3,.7,.2,1)}
+#cover.in .cover-wrap{opacity:1;transform:none}
+#cover.open .cover-wrap{transform:translateX(50%)}
+
+/* the page block + first page */
+.cover-pages{position:absolute;inset:5px -7px 5px 3px;border-radius:0 6px 6px 0;background:var(--card);box-shadow:0 34px 50px -22px rgba(0,0,0,.75)}
+.cover-pages::after{content:"";position:absolute;top:2px;bottom:2px;right:0;width:7px;border-radius:0 5px 5px 0;
+    background:repeating-linear-gradient(90deg,#f6efe3 0 2px,#ddd2c0 2px 3px)}
+.first-page{position:absolute;inset:0 7px 0 0;padding:26% 12% 0 13%;display:grid;align-content:start;gap:2px;color:#2f2620;
+    background-image:repeating-linear-gradient(transparent 0 33px,rgba(80,120,160,.22) 33px 34px);background-position:0 18%}
+.first-page .tiny{color:var(--soft);margin:0 0 14px}
+.fp-line{margin:0;font-size:clamp(26px,7vw,34px);line-height:1.1}
+.fp-line:last-child{color:var(--cherry)}
+.cover-ribbon{position:absolute;right:24%;bottom:-28px;width:14px;height:54px;background:var(--emerald);clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%)}
+
+/* the hinged cover board: front + inside */
+.cover-board{position:absolute;inset:0;transform-origin:left center;transform-style:preserve-3d;transition:transform 1.6s cubic-bezier(.6,.05,.25,1) .35s}
+#cover.open .cover-board{transform:rotateY(-172deg)}
+.cover-front,.cover-inside{position:absolute;inset:0;border-radius:3px 9px 9px 3px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.cover-front{background:#6b1626;
+    background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),
+    linear-gradient(90deg,rgba(0,0,0,.38) 0 14px,rgba(255,255,255,.09) 14px 16px,transparent 16px),radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.08),transparent 60%);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.3),inset 0 0 30px rgba(0,0,0,.25)}
+.cover-front::before{content:"";position:absolute;inset:12px 12px 12px 26px;border:1px solid rgba(0,0,0,.28);border-radius:3px 6px 6px 3px;
+    box-shadow:0 1px 0 rgba(255,255,255,.07),inset 0 1px 0 rgba(255,255,255,.07)}
+.corner{position:absolute;right:0;width:32px;height:32px;background:linear-gradient(135deg,#f6dc95,#c99a3c 55%,#80601f)}
+.corner.tr{top:0;border-radius:0 9px 0 0;clip-path:polygon(0 0,100% 0,100% 100%)}
+.corner.br{bottom:0;border-radius:0 0 9px 0;clip-path:polygon(100% 0,100% 100%,0 100%);background:linear-gradient(315deg,#f6dc95,#c99a3c 55%,#80601f)}
+
+.cover-pol{position:absolute;left:15%;top:8%;width:56%;background:var(--card);padding:8px 8px 0;transform:rotate(-4deg);
+    box-shadow:0 1px 2px rgba(0,0,0,.2),0 16px 22px -12px rgba(0,0,0,.6)}
+.cover-pol .washi{width:84px;height:22px}
+.cover-pol .cap{display:block;font-family:var(--f-scrawl),cursive;font-size:27px;line-height:1;padding:5px 2px 7px;color:#3a2f2a}
+.cph{position:relative;display:block;overflow:hidden;aspect-ratio:1/1;background:#3a2a22;isolation:isolate}
+.cph img{width:100%;height:100%;object-fit:cover;filter:sepia(.16) saturate(1.12) contrast(1.06)}
+.cph::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(40,20,10,.35) 100%);mix-blend-mode:multiply}
+.cph .date-stamp{font-size:12px;right:6px;bottom:4px}
+
+.cover-label{position:absolute;left:11%;right:16%;bottom:12%;text-wrap:balance;display:grid;gap:4px;justify-items:center;text-align:center;
+    padding:14px 14px 12px;background:#f3ead8;color:#5b1520;transform:rotate(2deg);
+    box-shadow:inset 0 0 0 1px rgba(91,21,32,.35),inset 0 0 0 4px #f3ead8,inset 0 0 0 5px rgba(91,21,32,.25),0 8px 14px -8px rgba(0,0,0,.6)}
+.cover-label .tiny{color:#7a4a4f}
+.cover-label .hand{font-size:22px;line-height:1;color:#2f2620}
+.plate-title{font-family:var(--f-serif),serif;font-style:italic;font-size:clamp(24px,6.6vw,32px);line-height:.95}
+.cover-date{position:absolute;right:13%;top:4%;width:56px;height:56px;z-index:2;display:grid;place-items:center;border-radius:50%;
+    background:var(--butter);color:var(--cherry-2);font-family:"Abril Fatface",serif;font-size:15px;transform:rotate(12deg);
+    box-shadow:0 0 0 3px #fff,0 6px 10px -4px rgba(0,0,0,.5)}
+.cover-tulip{position:absolute;left:7%;bottom:6%;width:52px;transform:rotate(-14deg);filter:drop-shadow(0 4px 4px rgba(0,0,0,.4))}
+.cover-tulip path{stroke:#fff;stroke-width:1.5;stroke-linejoin:round;paint-order:stroke}
+.cover-tulip .ct-head{fill:#b0384e}
+.cover-tulip .ct-leaf{fill:#4f8f6c}
+.cover-tulip .ct-stem{fill:none;stroke:#4f8f6c;stroke-width:1.8;stroke-linecap:round}
+
+/* the inside of the cover: tulip endpaper + bookplate */
+.cover-inside{transform:rotateY(180deg);overflow:hidden;display:grid;place-items:center;background-color:#f5e6e8;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cg fill='%238a1c2e' fill-opacity='.2'%3E%3Cpath d='M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z'/%3E%3Cpath d='M12 19.2c-2.6-.2-4.2-1.7-4.8-3.8 2.4.2 4 1.5 4.8 3.8z' fill='%232f6f55'/%3E%3C/g%3E%3Cpath d='M12 14v6.5' stroke='%232f6f55' stroke-opacity='.3' stroke-width='1.2'/%3E%3C/svg%3E"),
+                     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cg fill='%238a1c2e' fill-opacity='.2'%3E%3Cpath d='M6.5 5.5 9.3 8 12 4.5 14.7 8 17.5 5.5C17.5 11 15.5 14 12 14S6.5 11 6.5 5.5Z'/%3E%3Cpath d='M12 19.2c-2.6-.2-4.2-1.7-4.8-3.8 2.4.2 4 1.5 4.8 3.8z' fill='%232f6f55'/%3E%3C/g%3E%3Cpath d='M12 14v6.5' stroke='%232f6f55' stroke-opacity='.3' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-size:28px 28px;background-position:0 0,14px 14px;box-shadow:inset -18px 0 24px -12px rgba(0,0,0,.25)}
+.bookplate{width:72%;display:grid;gap:4px;justify-items:center;text-align:center;padding:20px 12px 18px;background:var(--card);color:#2f2620;transform:rotate(-2deg);
+    box-shadow:inset 0 0 0 2px var(--cherry),inset 0 0 0 5px var(--card),inset 0 0 0 6px var(--cherry),0 8px 14px -8px rgba(0,0,0,.4)}
+.bookplate .tiny{color:var(--cherry)}
+.bp-small{font-family:var(--f-type),monospace;font-size:12px;color:var(--soft)}
+.bp-name{font-size:clamp(30px,8vw,40px);line-height:1;color:var(--cherry)}
+
+/* the elastic strap that snaps off first */
+.cover-strap{position:absolute;top:-4px;bottom:-4px;right:7%;width:14px;z-index:5;border-radius:3px;
+    background:linear-gradient(90deg,#3a0710,#6b1020 35%,#5a0d1a 70%,#2e050c);
+    box-shadow:0 0 0 1px rgba(0,0,0,.25),3px 0 6px rgba(0,0,0,.35);transition:transform .45s cubic-bezier(.5,0,.75,0),opacity .45s}
+#cover.open .cover-strap{transform:translateX(70px) rotate(10deg);opacity:0}
+
+.cover-hint{margin:0;color:#e9d9c2;font-size:27px;opacity:0}
+#cover.in .cover-hint{opacity:1;animation:fadein .6s ease .9s both,breathe 2.4s ease-in-out 1.5s infinite}
+#cover.open .cover-hint{opacity:0;animation:none;transition:opacity .3s}
+
+@media (max-width:760px){#cover.open .cover-wrap{transform:scale(.6) translateX(50%)}}

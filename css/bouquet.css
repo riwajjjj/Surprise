@@ -1,6 +1,6 @@
-/* =====================================================================
-   the bouquet (button at the end of the book + the pop-out)
-   ===================================================================== */
+/* bouquet.css: the bouquet button and pop-out */
+
+/* ---------- the bouquet (button at the end of the book + the pop-out) ---------- */
 .bq-btn{position:relative;display:grid;justify-items:center;gap:4px;margin-top:26px;padding:14px 22px 12px;background:var(--card);color:var(--ink);
     transform:rotate(-2deg);transition:transform .3s cubic-bezier(.2,.8,.2,1);
     box-shadow:0 1px 2px rgba(40,25,15,.15),0 16px 24px -14px rgba(40,25,15,.55)}
@@ -21,48 +21,43 @@
 .bq.b7 .bq-line{animation:bqTitle .8s cubic-bezier(.3,1.6,.5,1)}
 @keyframes bqTitle{from{transform:scale(.6);opacity:0}}
 
-/* the bouquet always fits on the screen, phone or laptop */
+/* it always fits on the screen, phone or laptop (vh first, for phones that don't know dvh) */
 .bq-art{position:relative;width:min(95%,calc((100vh - 230px) * .714));width:min(95%,calc((100dvh - 230px) * .714));margin-top:-6px}
 .bq-stage{position:relative;z-index:1;width:100%;opacity:0;transform-origin:50% 86%;
     transform:translateY(-70px) scale(.62) rotate(-9deg);transition:opacity .4s ease,transform .8s cubic-bezier(.3,1.45,.5,1)}
 .bq.b1 .bq-stage{opacity:1;transform:none}
 .bq.b2:not(.b3) .bq-stage{animation:bqShake 1.4s ease-in-out}
+.bq.b7 .bq-stage{animation:bqPop .85s cubic-bezier(.3,1.5,.5,1),bqSway 5.5s ease-in-out .85s infinite alternate}
 @keyframes bqShake{
     8%{transform:rotate(-2deg)}16%{transform:rotate(2deg)}24%{transform:none}
     36%{transform:rotate(-4deg) scale(1.02)}46%{transform:rotate(4deg) scale(1.02)}54%{transform:none}
     66%{transform:rotate(-6deg) scale(1.04) translateY(-5px)}76%{transform:rotate(6deg) scale(1.04) translateY(-5px)}
     84%{transform:rotate(-3deg) scale(1.06) translateY(-9px)}92%{transform:rotate(3deg) scale(1.06) translateY(-9px)}100%{transform:none}}
-.bq.b7 .bq-stage{animation:bqPop .85s cubic-bezier(.3,1.5,.5,1),bqSway 5.5s ease-in-out .85s infinite alternate}
 @keyframes bqPop{35%{transform:scale(1.07) translateY(-10px)}}
 @keyframes bqSway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
 
-/* every layer is a painted image; they only move with transform/opacity, so it stays smooth on phones */
+/* every layer is a painted image that only moves with transform/opacity, so it stays smooth on phones */
 .bq-stage .ly{position:absolute;display:block;height:auto;max-width:none;pointer-events:none;user-select:none;-webkit-user-select:none}
-
-/* the paper: wrapped tight, then fanned open */
+/* b3: the paper, wrapped tight, fans open */
 .r-back{transform:scale(.24,.82);transition:transform .85s cubic-bezier(.3,1.3,.5,1)}
 .r-flapL{transform:rotate(15deg);transition:transform .85s cubic-bezier(.3,1.3,.5,1)}
 .r-flapR{transform:rotate(-15deg);transition:transform .85s cubic-bezier(.3,1.3,.5,1)}
 .bq.b3 .r-back,.bq.b3 .r-flapL,.bq.b3 .r-flapR{transform:none}
-
-/* greenery bursts out from the tie; stems grow up from the bottom */
+/* b4: greenery bursts out of the tie, stems grow up, a closed bud swells on each */
 .r-greens{opacity:0;transform:scale(.08) rotate(-8deg);transition:transform 1.1s cubic-bezier(.3,1.25,.5,1),opacity .35s ease}
 .bq.b4 .r-greens{opacity:1;transform:none}
 .r-stems{clip-path:inset(100% 0 0 0);transition:clip-path 1.1s cubic-bezier(.4,0,.2,1) .15s}
 .bq.b4 .r-stems{clip-path:inset(0)}
-
-/* a small closed bud swells at the end of each stem… */
 .r-bud{opacity:0;transform:scale(0);transition:transform .6s cubic-bezier(.3,1.6,.5,1) calc(.55s + var(--k) * 45ms),opacity .3s ease calc(.55s + var(--k) * 45ms)}
 .bq.b4 .r-bud{opacity:1;transform:none}
+/* b5: each bud gives way to its flower, twisting open from the middle outwards */
 .bq.b5 .r-bud{opacity:0;transform:scale(1.25);transition:transform .6s ease calc(var(--k) * 95ms),opacity .45s ease calc(var(--k) * 95ms + .12s)}
-/* …then the flower unfurls from it, twisting open */
 .r-flower{opacity:0;transform:scale(.18) rotate(-34deg);
     transition:transform 1.05s cubic-bezier(.22,1.25,.36,1) calc(var(--k) * 95ms),opacity .4s ease calc(var(--k) * 95ms)}
 .bq.b5 .r-flower{opacity:1;transform:none}
 .r-breath{opacity:0;transform:scale(0);transition:transform .7s cubic-bezier(.3,1.6,.5,1) calc(.7s + var(--k) * 80ms),opacity .3s ease calc(.7s + var(--k) * 80ms)}
 .bq.b5 .r-breath{opacity:1;transform:none}
-
-/* the ribbon wraps round, the bow springs out, the tails drop */
+/* b6: the ribbon wraps round, the bow springs out, the tails drop */
 .r-band{transform:scaleX(0);transition:transform .45s cubic-bezier(.4,0,.2,1)}
 .bq.b6 .r-band{transform:none}
 .r-bow{opacity:0;transform:scale(0) rotate(-24deg);transition:transform .75s cubic-bezier(.3,1.7,.5,1) .2s,opacity .2s ease .2s}
@@ -70,7 +65,7 @@
 .r-tails{transform:scaleY(0);transition:transform .7s cubic-bezier(.3,1.4,.5,1) .35s}
 .bq.b6 .r-tails{transform:none}
 
-/* a warm glow behind it, sparkles and drifting petals once it pops */
+/* b7, the pop: a warm glow behind it, sparkles, drifting petals */
 .bq-glow{position:absolute;left:4%;right:4%;top:4%;height:66%;border-radius:50%;pointer-events:none;
     background:radial-gradient(closest-side,rgba(255,214,196,.4),rgba(255,190,170,0));opacity:0;transform:scale(.6);transition:opacity 1.2s ease,transform 1.6s cubic-bezier(.2,.8,.2,1)}
 .bq.b5 .bq-glow{opacity:.6;transform:scale(.92)}
@@ -103,11 +98,10 @@
 .bq.b7 .bq-actions{opacity:1;pointer-events:auto}
 .bq-actions button{font-size:15px;color:#f3e4cf;padding:6px 4px}
 .bq-actions button:hover{color:#fff}
+
 @media (max-height:640px){.bq-line{font-size:28px;min-height:32px}.bq-tag p{font-size:21px}}
 @media (max-width:420px){.bq-tag p{font-size:22px}.bq-tag{padding:11px 14px 10px 34px}}
-
-/* bigger screens (laptops, tablets): the bouquet grows to use the space, and the tag hangs off its lower right
-   instead of sitting underneath, so the flowers get the extra height. Phones are unchanged. */
+/* laptops, tablets: the bouquet grows into the space and the tag hangs off its lower right */
 @media (min-width:700px) and (min-height:560px){
     #bouquetBox{width:min(680px,calc(100vw - 40px))}
     .bq-art{width:min(100%,calc((100vh - 120px) * .714));width:min(100%,calc((100dvh - 120px) * .714))}
