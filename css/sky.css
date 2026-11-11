@@ -1,0 +1,47 @@
+/* sky.css: "that night": the star chart of the sky over Kathmandu the moment she said yes */
+
+/* ---------- the band: deep night blue ---------- */
+.sky-band{background-color:#141936;
+    background-image:var(--grain,none),radial-gradient(ellipse at 50% 0,rgba(110,120,200,.22),transparent 65%);
+    box-shadow:inset 0 14px 20px -14px rgba(0,0,0,.6),inset 0 -14px 20px -14px rgba(0,0,0,.6)}
+.sky-band .sec-title .note{color:#e3dcef}
+
+/* ---------- the printed chart, taped down ---------- */
+.sky-card{position:relative;width:min(460px,94%);margin:0 auto;padding:16px 16px 18px;background:var(--card);text-align:center;
+    transform:rotate(1deg);box-shadow:0 1px 2px rgba(0,0,0,.2),0 26px 34px -20px rgba(0,0,0,.7)}
+.sky-card svg#skyChart{display:block;width:100%;height:auto}
+.sky-rim{fill:#0c1030}
+.sky-horizon{fill:none;stroke:#e9dcc0;stroke-width:1.4}
+.sky-grid{fill:none;stroke:rgba(201,216,228,.13);stroke-width:.6;stroke-dasharray:2 3}
+.sky-ticks line{stroke:#e9dcc0;stroke-width:1}
+.sky-dir{fill:var(--soft);font-family:var(--f-mono),monospace;font-size:14px;font-weight:700;text-anchor:middle}
+.sky-lines polyline{fill:none;stroke:rgba(201,216,228,.32);stroke-width:.7;stroke-linejoin:round}
+.sky-stars circle{fill:#fff8e6}
+.sky-stars .tw{animation:skyTwinkle 2.6s ease-in-out var(--td,0s) infinite alternate;animation-play-state:paused;transform-box:fill-box;transform-origin:center}
+.sky-card.live .sky-stars .tw{animation-play-state:running}
+@keyframes skyTwinkle{from{opacity:.55;transform:scale(.8)}to{opacity:1;transform:scale(1.15)}}
+.planet.saturn{fill:#f4d38c}
+.planet.mars{fill:#ef8f6c}
+.ring{fill:none;stroke:#f4d38c;stroke-width:.9}
+.sky-label{fill:#f6d9a6;font-family:var(--f-hand),cursive;font-size:18px;stroke:#151b44;stroke-width:3px;stroke-linejoin:round;paint-order:stroke}
+
+.sky-when{margin:12px 0 0;color:var(--soft);font-size:12px;letter-spacing:.08em}
+.sky-cap{margin:4px 0 0;font-size:29px;line-height:1.1;color:var(--cherry);text-wrap:balance}
+.sky-moon{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
+.sky-moon svg{flex:none;width:34px;height:34px;padding:2px;border-radius:50%;background:#151b44}
+.moon-dark{fill:#2a3160}
+.moon-lit{fill:#fbf2d6}
+.sky-moon p{margin:0;max-width:300px;font-size:21px;line-height:1.1;color:#3a2f2a;text-align:left;text-wrap:pretty}
+
+/* ---------- it fades in, constellations after the stars, names last ---------- */
+.sky-card .sky-stars,.sky-card .sky-lines,.sky-card .sky-labels{transition:opacity 1.6s ease}
+.sky-card:not(.shown) .sky-stars,.sky-card:not(.shown) .sky-lines,.sky-card:not(.shown) .sky-labels{opacity:0}
+.sky-card.shown .sky-lines{transition-delay:1.2s}
+.sky-card.shown .sky-labels{transition-delay:2.2s}
+
+@media (max-width:560px){
+    .sky-card{padding:12px 10px 16px}
+    .sky-label{font-size:21px}
+    .sky-moon p{font-size:19px}
+    .sky-cap{font-size:26px}
+}

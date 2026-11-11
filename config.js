@@ -52,6 +52,7 @@ window.CONFIG = {
         // { date: "21.09", label: "our first hangout" },
     ],
     friendsSince: "2025",                // when you became friends (shown on the ticket)
+    sky: true,                           // "that night": the real star chart of the sky over Kathmandu at 00:55 on 07.10.2026 (false to hide)
     garden: true,                        // "our little garden": a new tulip every month, each one blooms on your monthly anniversary (false to hide)
     nightMode: true,                     // after 11pm (Kathmandu time) the site dims, stars come out and a goodnight note pops up once a night (false = off)
     nightNote: "it’s late. go to sleep, i’ll still be here tomorrow ♡",
@@ -179,4 +180,4 @@ window.CONFIG = {
     // a sealed envelope at the very end that only opens on a date. null = off.
     // To turn it on: sealedLetter: { opensOn: "07.10.2027", title: "our first year", body: "..." }
     sealedLetter: null
-};
+};
